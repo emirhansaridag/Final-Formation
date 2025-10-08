@@ -1,0 +1,12 @@
+[gd_scene load_steps=3 format=3 uid="uid://dlppdngce14cv"]
+
+[ext_resource type="Script" uid="uid://c66mffrge5dcs" path="res://scrpits/enemy_spawner.gd" id="1_mrlrb"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_bst7d"]
+
+[node name="enemySpawnerArea" type="Area3D"]
+script = ExtResource("1_mrlrb")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 1, 0, 0, 0, 9, 0, 0, 0)
+shape = SubResource("BoxShape3D_bst7d")

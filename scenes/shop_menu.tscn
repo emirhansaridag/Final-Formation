@@ -1,0 +1,489 @@
+[gd_scene load_steps=14 format=3 uid="uid://da1ubl023o8bo"]
+
+[ext_resource type="Script" uid="uid://87uwpvqehi4" path="res://scrpits/shop_menu.gd" id="1_8n4xd"]
+[ext_resource type="Texture2D" uid="uid://c2kkb2gf6p2sd" path="res://textures/shoppingBackground2.png" id="1_uj65v"]
+[ext_resource type="Texture2D" uid="uid://dmnsywm6to7fa" path="res://textures/upgradeMenuTextures/brownPanel.png" id="2_5pe57"]
+[ext_resource type="Texture2D" uid="uid://dy41wxh30ylgq" path="res://textures/upgradeMenuTextures/blueBar.png" id="3_1ltno"]
+[ext_resource type="Texture2D" uid="uid://cpqhynhxi3he8" path="res://textures/upgradeMenuTextures/5248403-200.png" id="3_5gjx7"]
+[ext_resource type="Texture2D" uid="uid://d1583bt6yqlh" path="res://textures/upgradeMenuTextures/redBar.png" id="4_bq4yc"]
+[ext_resource type="Texture2D" uid="uid://ctyg8xey02nd3" path="res://textures/upgradeMenuTextures/arrowBeige_right.png" id="5_hgolc"]
+[ext_resource type="Texture2D" uid="uid://d17odjxyp74v5" path="res://textures/upgradeMenuTextures/2360277-200.png" id="5_lngpu"]
+[ext_resource type="Texture2D" uid="uid://cqqo6d4ktckip" path="res://textures/upgradeMenuTextures/coin.png" id="6_amlfo"]
+[ext_resource type="Texture2D" uid="uid://d0csv3fsj2yfs" path="res://textures/upgradeMenuTextures/greenBar.png" id="7_bq4yc"]
+[ext_resource type="Texture2D" uid="uid://codqm3ytidi8a" path="res://textures/upgradeMenuTextures/games_13537752.png" id="7_lngpu"]
+[ext_resource type="Texture2D" uid="uid://coijrnvw4qyr6" path="res://textures/upgradeMenuTextures/maxPlayerIcon.png" id="11_rg5ak"]
+[ext_resource type="Texture2D" uid="uid://d1esvbtjrcnku" path="res://textures/upgradeMenuTextures/yellowBar.png" id="11_tnh3q"]
+
+[node name="shop_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_8n4xd")
+
+[node name="background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_uj65v")
+expand_mode = 1
+
+[node name="backButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -80.0
+offset_right = 120.0
+offset_bottom = -20.0
+grow_vertical = 0
+text = "Back"
+
+[node name="currencyDisplay" type="Control" parent="."]
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 80.0
+grow_horizontal = 0
+
+[node name="coinIcon" type="TextureRect" parent="currencyDisplay"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = -20.0
+offset_right = 50.0
+offset_bottom = 20.0
+grow_vertical = 2
+texture = ExtResource("6_amlfo")
+expand_mode = 1
+
+[node name="currencyLabel" type="Label" parent="currencyDisplay"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -15.0
+offset_right = -10.0
+offset_bottom = 15.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "100"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="upgrades" type="Control" parent="."]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.382
+anchor_right = 0.5
+anchor_bottom = 0.382
+offset_left = -200.0
+offset_top = -166.72
+offset_right = 238.0
+offset_bottom = 262.28
+
+[node name="damage" type="Control" parent="upgrades"]
+layout_mode = 1
+anchor_left = 0.51
+anchor_top = 0.195
+anchor_right = 0.51
+anchor_bottom = 0.195
+offset_left = -224.38
+offset_top = -81.655
+offset_right = 212.62
+offset_bottom = 0.344994
+
+[node name="panel1" type="TextureRect" parent="upgrades/damage"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.197
+anchor_right = 0.5
+anchor_bottom = 0.197
+offset_left = -219.5
+offset_top = -19.154
+offset_right = 220.5
+offset_bottom = 68.846
+grow_horizontal = 2
+texture = ExtResource("2_5pe57")
+
+[node name="dmgIcon" type="TextureRect" parent="upgrades/damage"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.304
+anchor_top = 0.2
+anchor_right = 0.304
+anchor_bottom = 0.2
+offset_left = -107.848
+offset_top = 6.6
+offset_right = -67.848
+offset_bottom = 46.6
+texture = ExtResource("3_5gjx7")
+expand_mode = 1
+
+[node name="dmgUpgradeBar" type="TextureProgressBar" parent="upgrades/damage"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.199
+anchor_right = 0.5
+anchor_bottom = 0.199
+offset_left = -138.5
+offset_top = -0.318001
+offset_right = 53.5
+offset_bottom = 47.682
+max_value = 12.0
+texture_progress = ExtResource("4_bq4yc")
+
+[node name="dmgUpButton" type="Button" parent="upgrades/damage"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.917
+anchor_top = 0.5
+anchor_right = 0.917
+anchor_bottom = 0.5
+offset_left = -14.729
+offset_top = -15.0
+offset_right = 14.271
+offset_bottom = 15.0
+icon = ExtResource("5_hgolc")
+flat = true
+icon_alignment = 1
+
+[node name="coinSymbol" type="TextureRect" parent="upgrades/damage"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.82
+anchor_top = 0.5
+anchor_right = 0.82
+anchor_bottom = 0.5
+offset_left = -19.34
+offset_top = -19.0
+offset_right = 21.66
+offset_bottom = 20.0
+texture = ExtResource("6_amlfo")
+expand_mode = 1
+
+[node name="dmgCost" type="Label" parent="upgrades/damage"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.706
+anchor_top = 0.5
+anchor_right = 0.706
+anchor_bottom = 0.5
+offset_left = -32.522
+offset_top = -11.0
+offset_right = 32.478
+offset_bottom = 12.0
+text = "[coin amount]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="attackSpeed" type="Control" parent="upgrades"]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.378
+anchor_right = 0.5
+anchor_bottom = 0.378
+offset_left = -220.0
+offset_top = 8.838
+offset_right = 218.0
+offset_bottom = 95.838
+
+[node name="panel2" type="TextureRect" parent="upgrades/attackSpeed"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.525
+anchor_top = 0.376
+anchor_right = 0.525
+anchor_bottom = 0.376
+offset_left = -230.95
+offset_top = -32.712
+offset_right = 209.05
+offset_bottom = 55.288
+grow_horizontal = 2
+texture = ExtResource("2_5pe57")
+
+[node name="attackSpeedIcon" type="TextureRect" parent="upgrades/attackSpeed"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.298
+anchor_top = 0.373
+anchor_right = 0.301
+anchor_bottom = 0.373
+offset_left = -105.524
+offset_top = -11.451
+offset_right = -51.684
+offset_bottom = 44.549
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("5_lngpu")
+expand_mode = 1
+
+[node name="attackSpeedUpgradeBar" type="TextureProgressBar" parent="upgrades/attackSpeed"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.376
+anchor_right = 0.5
+anchor_bottom = 0.376
+offset_left = -139.0
+offset_top = -12.712
+offset_right = 53.0
+offset_bottom = 35.288
+max_value = 12.0
+texture_progress = ExtResource("3_1ltno")
+
+[node name="attackSpeedUpButton" type="Button" parent="upgrades/attackSpeed"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.917
+anchor_top = 0.5
+anchor_right = 0.917
+anchor_bottom = 0.5
+offset_left = -14.729
+offset_top = -15.0
+offset_right = 14.271
+offset_bottom = 15.0
+icon = ExtResource("5_hgolc")
+flat = true
+icon_alignment = 1
+
+[node name="coinSymbol" type="TextureRect" parent="upgrades/attackSpeed"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.82
+anchor_top = 0.5
+anchor_right = 0.82
+anchor_bottom = 0.5
+offset_left = -19.34
+offset_top = -19.0
+offset_right = 21.66
+offset_bottom = 20.0
+texture = ExtResource("6_amlfo")
+expand_mode = 1
+
+[node name="attackSpeedCost" type="Label" parent="upgrades/attackSpeed"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.706
+anchor_top = 0.5
+anchor_right = 0.706
+anchor_bottom = 0.5
+offset_left = -32.522
+offset_top = -11.0
+offset_right = 32.478
+offset_bottom = 12.0
+text = "[coin amount]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="level" type="Control" parent="upgrades"]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.555
+anchor_right = 0.5
+anchor_bottom = 0.555
+offset_left = -220.0
+offset_top = 105.905
+offset_right = 218.0
+offset_bottom = 191.905
+
+[node name="panel3" type="TextureRect" parent="upgrades/level"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.525
+anchor_top = 0.555
+anchor_right = 0.525
+anchor_bottom = 0.555
+offset_left = -230.95
+offset_top = -48.73
+offset_right = 209.05
+offset_bottom = 39.27
+grow_horizontal = 2
+texture = ExtResource("2_5pe57")
+
+[node name="levelIcon" type="TextureRect" parent="upgrades/level"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.296
+anchor_top = 0.555
+anchor_right = 0.296
+anchor_bottom = 0.555
+offset_left = -104.648
+offset_top = -27.084
+offset_right = -48.648
+offset_bottom = 28.916
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("7_lngpu")
+expand_mode = 1
+
+[node name="levelUpgradeBar" type="TextureProgressBar" parent="upgrades/level"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.494
+anchor_top = 0.554
+anchor_right = 0.494
+anchor_bottom = 0.554
+offset_left = -136.372
+offset_top = -27.644
+offset_right = 55.628
+offset_bottom = 20.356
+max_value = 12.0
+texture_progress = ExtResource("7_bq4yc")
+
+[node name="levelUpButton" type="Button" parent="upgrades/level"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.917
+anchor_top = 0.5
+anchor_right = 0.917
+anchor_bottom = 0.5
+offset_left = -14.729
+offset_top = -15.0
+offset_right = 14.271
+offset_bottom = 15.0
+icon = ExtResource("5_hgolc")
+flat = true
+icon_alignment = 1
+
+[node name="coinSymbol" type="TextureRect" parent="upgrades/level"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.82
+anchor_top = 0.5
+anchor_right = 0.82
+anchor_bottom = 0.5
+offset_left = -19.34
+offset_top = -19.0
+offset_right = 21.66
+offset_bottom = 20.0
+texture = ExtResource("6_amlfo")
+expand_mode = 1
+
+[node name="levelCost" type="Label" parent="upgrades/level"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.706
+anchor_top = 0.5
+anchor_right = 0.706
+anchor_bottom = 0.5
+offset_left = -32.522
+offset_top = -11.0
+offset_right = 32.478
+offset_bottom = 12.0
+text = "[coin amount]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="maxShooter" type="Control" parent="upgrades"]
+layout_mode = 1
+anchor_left = 0.5
+anchor_top = 0.555
+anchor_right = 0.5
+anchor_bottom = 0.555
+offset_left = -221.0
+offset_top = 259.54
+offset_right = 217.0
+offset_bottom = 345.54
+
+[node name="panel4" type="TextureRect" parent="upgrades/maxShooter"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.525
+anchor_top = 0.555
+anchor_right = 0.525
+anchor_bottom = 0.555
+offset_left = -230.95
+offset_top = -48.73
+offset_right = 209.05
+offset_bottom = 39.27
+grow_horizontal = 2
+texture = ExtResource("2_5pe57")
+
+[node name="maxShooterIcon" type="TextureRect" parent="upgrades/maxShooter"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.296
+anchor_top = 0.555
+anchor_right = 0.296
+anchor_bottom = 0.555
+offset_left = -111.648
+offset_top = -31.365
+offset_right = -39.648
+offset_bottom = 38.635
+scale = Vector2(0.8, 0.8)
+texture = ExtResource("11_rg5ak")
+expand_mode = 1
+
+[node name="maxShooterUpgradeBar" type="TextureProgressBar" parent="upgrades/maxShooter"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.494
+anchor_top = 0.554
+anchor_right = 0.494
+anchor_bottom = 0.554
+offset_left = -136.372
+offset_top = -27.644
+offset_right = 55.628
+offset_bottom = 20.356
+max_value = 10.0
+texture_progress = ExtResource("11_tnh3q")
+
+[node name="maxShooterUpgradeButton" type="Button" parent="upgrades/maxShooter"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.917
+anchor_top = 0.5
+anchor_right = 0.917
+anchor_bottom = 0.5
+offset_left = -14.729
+offset_top = -15.0
+offset_right = 14.271
+offset_bottom = 15.0
+icon = ExtResource("5_hgolc")
+flat = true
+icon_alignment = 1
+
+[node name="coinSymbol" type="TextureRect" parent="upgrades/maxShooter"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.82
+anchor_top = 0.5
+anchor_right = 0.82
+anchor_bottom = 0.5
+offset_left = -19.34
+offset_top = -19.0
+offset_right = 21.66
+offset_bottom = 20.0
+texture = ExtResource("6_amlfo")
+expand_mode = 1
+
+[node name="maxShooterUpgradeCost" type="Label" parent="upgrades/maxShooter"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.706
+anchor_top = 0.5
+anchor_right = 0.706
+anchor_bottom = 0.5
+offset_left = -32.522
+offset_top = -11.0
+offset_right = 32.478
+offset_bottom = 12.0
+text = "[coin amount]"
+horizontal_alignment = 1
+vertical_alignment = 1

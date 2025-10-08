@@ -1,0 +1,48 @@
+[gd_scene load_steps=6 format=3 uid="uid://cilc3klgomush"]
+
+[ext_resource type="Script" uid="uid://sfbcf8mrkder" path="res://scrpits/projectile.gd" id="1_0qrog"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_bfhns"]
+size = Vector3(0.2, 0.05, 0.05)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i71u3"]
+albedo_color = Color(1, 0.352941, 0.0313726, 1)
+emission_enabled = true
+emission = Color(0, 0.564706, 0.482353, 1)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_hti6i"]
+points = PackedVector3Array(-0.0956303, -0.025, -0.025, 0.0926418, 0.025, 0.025, 0.0926418, 0.025, -0.0242063, 0.0956303, -0.025, -0.025, 0.0926418, -0.0242063, 0.025, -0.0926418, 0.025, 0.025, -0.0926418, 0.025, -0.0242063, -0.0926418, -0.0242063, 0.025)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_t1xed"]
+size = Vector3(0.203857, 0.0508423, 0.0505371)
+
+[node name="Projectile" type="CharacterBody3D"]
+collision_layer = 8
+collision_mask = 8
+script = ExtResource("1_0qrog")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+mesh = SubResource("BoxMesh_bfhns")
+surface_material_override/0 = SubResource("StandardMaterial3D_i71u3")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+shape = SubResource("ConvexPolygonShape3D_hti6i")
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 5.0
+autostart = true
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
+collision_layer = 4
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00109863, 0.00192261, -0.000610352)
+shape = SubResource("BoxShape3D_t1xed")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="area_entered" from="Area3D" to="." method="_on_area_3d_area_entered"]
