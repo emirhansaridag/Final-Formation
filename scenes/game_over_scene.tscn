@@ -1,0 +1,91 @@
+[gd_scene load_steps=4 format=3 uid="uid://bhk8kixfdm4eu"]
+
+[ext_resource type="Texture2D" uid="uid://dqtad3sdg0ao3" path="res://textures/gameOverScreen.png" id="1_64dwf"]
+[ext_resource type="Script" uid="uid://qqga0m53ytxt" path="res://scrpits/game_over_scene.gd" id="1_ny7m6"]
+[ext_resource type="Texture2D" uid="uid://cqqo6d4ktckip" path="res://textures/upgradeMenuTextures/coin.png" id="3_k0nam"]
+
+[node name="game_over_scene" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -1.0
+offset_right = -1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ny7m6")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -299.0
+offset_top = -197.0
+offset_right = -259.0
+offset_bottom = -157.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(15, 10)
+texture = ExtResource("1_64dwf")
+expand_mode = 1
+
+[node name="homeButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -66.0
+offset_top = 69.0
+offset_right = 68.0
+offset_bottom = 169.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.755
+anchor_top = 0.583
+anchor_right = 0.755
+anchor_bottom = 0.583
+offset_left = -50.6
+offset_top = -11.68
+offset_right = 50.4
+offset_bottom = 11.32
+text = "Coins Earned"
+
+[node name="coins" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.254
+anchor_top = 2.429
+anchor_right = 0.254
+anchor_bottom = 2.429
+offset_left = 288.12
+offset_top = -1739.84
+offset_right = 398.12
+offset_bottom = -1716.84
+text = "[earned coins]"
+
+[node name="coin" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.837
+anchor_top = 0.631
+anchor_right = 0.837
+anchor_bottom = 0.631
+offset_left = -14.64
+offset_top = -16.76
+offset_right = 1009.36
+offset_bottom = 1007.24
+scale = Vector2(0.03, 0.03)
+texture = ExtResource("3_k0nam")
+expand_mode = 1
+
+[connection signal="pressed" from="homeButton" to="." method="_on_home_button_pressed"]

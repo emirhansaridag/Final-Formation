@@ -1,0 +1,49 @@
+[gd_resource type="Resource" script_class="GameConfig" load_steps=2 format=3]
+
+[ext_resource type="Script" path="res://scrpits/GameConfig.gd" id="1_fnbpw"]
+
+[resource]
+script = ExtResource("1_fnbpw")
+base_firerate = 0.8
+base_damage = 10.0
+max_shooters_per_area = 3
+shooter_move_speed = 3.0
+shooter_drag_speed = 600.0
+enemy_base_health = 10.0
+enemy_move_speed = 2.0
+enemy_spawn_interval = 3.0
+enemy_scale = Vector3(0.2, 0.2, 0.2)
+serat_boss_scale = Vector3(2, 2, 2)
+aras_boss_scale = Vector3(2, 2, 2)
+burak_boss_scale = Vector3(2, 2, 2)
+gun_box_health = 100.0
+gun_box_speed = 3.0
+gun_box_spawn_interval = 5.0
+shooter_spawner_interval = 1.0
+projectile_speed = 40.0
+projectile_lifetime = 5.0
+area_bounds = Vector2(2.5, 2.5)
+ground_min_x = -11.0
+ground_max_x = 11.0
+min_distance_between_shooters = 1.0
+camera_follow_speed = 3.0
+camera_dead_zone = 0.1
+gun_box_spawn_position = Vector3(8, 1, -50)
+shooter_adder_spawn_position = Vector3(-8, 2.2, -50)
+enemy_spawn_offset = Vector3(-45, 0, -0.5)
+level_duration = 240.0
+serat_boss_start_time = 120.0
+aras_boss_start_time = 60.0
+burak_boss_start_time = 180.0
+stickman_spawn_rate = 1.0
+serat_boss_spawn_rate = 5.0
+aras_boss_spawn_rate = 7.0
+burak_boss_spawn_rate = 9.0
+max_projectiles = 100
+max_enemies = 5000
+update_frequency_reduction = 0.05
+lod_distance_threshold = 30.0
+debug_mode = false
+debug_serat_boss_start_time = 5.0
+debug_aras_boss_start_time = 3.0
+debug_burak_boss_start_time = 10.0

@@ -1,0 +1,5 @@
+[gd_scene load_steps=2 format=3 uid="uid://s7kaie05tsvg"]
+
+[ext_resource type="PackedScene" uid="uid://prdt6hniljky" path="res://models/mainRoadTextured.glb" id="1_mprjy"]
+
+[node name="mainRoadTextured" instance=ExtResource("1_mprjy")]

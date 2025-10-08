@@ -1,0 +1,82 @@
+[gd_scene load_steps=7 format=3 uid="uid://be0tbn5dgviiu"]
+
+[ext_resource type="Script" uid="uid://mbygottuaipn" path="res://scrpits/main_menu.gd" id="1_ekxnf"]
+[ext_resource type="Texture2D" uid="uid://bdm8n5bjgkry3" path="res://textures/catBackground3.png" id="2_ekxnf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1ajci"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_ekxnf"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_bqqt6"]
+
+[sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_lgwnu"]
+
+[node name="mainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_ekxnf")
+
+[node name="background" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_ekxnf")
+expand_mode = 1
+
+[node name="playButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.91
+anchor_right = 0.5
+anchor_bottom = 0.91
+offset_left = -136.0
+offset_top = -37.6
+offset_right = -108.0
+offset_bottom = -28.6
+scale = Vector2(9.73, 9.73)
+theme_override_styles/focus = SubResource("StyleBoxEmpty_1ajci")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_ekxnf")
+flat = true
+
+[node name="settingsButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.158
+anchor_top = 0.921
+anchor_right = 0.158
+anchor_bottom = 0.921
+offset_left = -46.76
+offset_top = -41.16
+offset_right = 31.24
+offset_bottom = 41.84
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bqqt6")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_lgwnu")
+flat = true
+
+[node name="shopButton" type="Button" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.837
+anchor_top = 0.914
+anchor_right = 0.837
+anchor_bottom = 0.914
+offset_left = -63.64
+offset_top = -48.4401
+offset_right = 59.36
+offset_bottom = 64.5599
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_styles/focus = SubResource("StyleBoxEmpty_bqqt6")
+theme_override_styles/pressed = SubResource("StyleBoxEmpty_lgwnu")
+flat = true
+
+[connection signal="button_down" from="playButton" to="." method="_on_play_button_button_down"]
+[connection signal="button_down" from="shopButton" to="." method="_on_shop_button_button_down"]

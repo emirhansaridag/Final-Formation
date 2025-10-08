@@ -1,0 +1,166 @@
+[gd_scene load_steps=6 format=3 uid="uid://dy76tyh7qhqtx"]
+
+[ext_resource type="Texture2D" uid="uid://bhy1mhuq81hha" path="res://textures/panel_brown.png" id="1_n87rw"]
+[ext_resource type="Texture2D" uid="uid://c56jb48j5j6a2" path="res://textures/—Pngtree—exit close button for game_6655002 (1).png" id="2_myx47"]
+[ext_resource type="Texture2D" uid="uid://dm3m428t133pf" path="res://textures/vecteezy_speaker-green-and-red-symbol-icon-set-sound-vector-icon_15416079-removebg-preview.png" id="3_kukqi"]
+[ext_resource type="Texture2D" uid="uid://4k0q5tvj6pe8" path="res://textures/button_credits.png" id="4_7l7mv"]
+[ext_resource type="Texture2D" uid="uid://bvhxymw7yehvv" path="res://textures/buttonLong_beige_pressed.png" id="6_v4r4p"]
+
+[node name="pause_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="bg_panel" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -203.0
+offset_top = -205.0
+offset_right = -163.0
+offset_bottom = -165.0
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(10, 10)
+texture = ExtResource("1_n87rw")
+expand_mode = 1
+
+[node name="close" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.758
+anchor_top = 0.299
+anchor_right = 0.758
+anchor_bottom = 0.299
+offset_left = -33.76
+offset_top = -34.04
+offset_right = 66.24
+offset_bottom = 65.96
+scale = Vector2(0.7, 0.7)
+texture = ExtResource("2_myx47")
+
+[node name="close_button" type="Button" parent="close"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -50.0
+offset_top = -50.0
+offset_right = 50.0
+offset_bottom = 49.0
+grow_horizontal = 2
+grow_vertical = 2
+flat = true
+
+[node name="muteUnmuteButton" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.4
+anchor_top = 0.366
+anchor_right = 0.4
+anchor_bottom = 0.366
+offset_left = -106.0
+offset_top = -53.36
+offset_right = 601.0
+offset_bottom = 299.64
+scale = Vector2(0.3, 0.3)
+texture = ExtResource("3_kukqi")
+
+[node name="unmuteButton" type="Button" parent="muteUnmuteButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.269
+anchor_top = 0.5
+anchor_right = 0.269
+anchor_bottom = 0.5
+offset_left = -127.183
+offset_top = -119.5
+offset_right = 126.817
+offset_bottom = 130.5
+flat = true
+
+[node name="muteButton" type="Button" parent="muteUnmuteButton"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.726
+anchor_top = 0.516
+anchor_right = 0.726
+anchor_bottom = 0.516
+offset_left = -129.949
+offset_top = -122.148
+offset_right = 124.051
+offset_bottom = 127.852
+flat = true
+
+[node name="credits" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.367
+anchor_top = 0.488
+anchor_right = 0.367
+anchor_bottom = 0.488
+offset_left = -70.24
+offset_top = -25.48
+offset_right = 109.76
+offset_bottom = 40.52
+scale = Vector2(0.78, 0.78)
+texture = ExtResource("4_7l7mv")
+
+[node name="creditsButton" type="Button" parent="credits"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.508
+anchor_right = 0.5
+anchor_bottom = 0.508
+offset_left = -91.0
+offset_top = -33.528
+offset_right = 92.0
+offset_bottom = 33.472
+flat = true
+
+[node name="creditsTexts" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TextureRect" type="TextureRect" parent="creditsTexts"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 8.725
+anchor_top = 11.712
+anchor_right = 8.725
+anchor_bottom = 11.712
+offset_left = -232.0
+offset_top = -54.48
+offset_right = -42.0
+offset_bottom = -9.48004
+scale = Vector2(2.5, 2.5)
+texture = ExtResource("6_v4r4p")
+
+[node name="Label" type="Label" parent="creditsTexts"]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 8.85
+anchor_top = 11.775
+anchor_right = 8.85
+anchor_bottom = 11.775
+offset_left = -232.0
+offset_top = -49.0
+offset_right = 231.0
+offset_bottom = 51.0
+text = "Stickman: sifrani (https://sketchfab.com/sifrani)
+UI Assets: Kenney
+Music: Dan Knoflicek, yd(OpenGameArt)"
+horizontal_alignment = 1
+vertical_alignment = 1

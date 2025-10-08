@@ -1,0 +1,65 @@
+[gd_scene load_steps=7 format=4 uid="uid://81rf0aux36o3"]
+
+[ext_resource type="Script" uid="uid://6wwxopry1j6k" path="res://scrpits/gun_box.gd" id="1_gxm03"]
+[ext_resource type="Texture2D" uid="uid://cs22eq0cjxt0v" path="res://models/mainRoadTextured_boxbox.png" id="2_fcywu"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_y0y2w"]
+points = PackedVector3Array(-1.5, -1.49971, -1.49971, 1.5, 1.49978, 1.49978, 1.5, -1.49978, 1.49978, 1.5, 1.49978, -1.49978, -1.5, 1.49971, 1.49971, 1.5, -1.49978, -1.49978, -1.5, -1.49971, 1.49971, -1.5, 1.49971, -1.49971)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ro6gx"]
+resource_name = "Material.003"
+cull_mode = 2
+albedo_texture = ExtResource("2_fcywu")
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_ugfhx"]
+_surfaces = [{
+"aabb": AABB(-1.5, -1.5, -1.5, 3, 3, 3),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAACAAEAAwAEAAEABQAAAAIAAwAAAAUABAAGAAIABQACAAYAAwAHAAQAAwAFAAcABwAGAAQABwAFAAYA"),
+"name": "Material.003",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP//AAAAAP//AAAAAAAA/////wAAAAAAAAAAAAD/////AAAAAP//AAD//wAA////////AAD//wAAAAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_4xahv"]
+resource_name = "mainRoadTextured_Cube_004"
+_surfaces = [{
+"aabb": AABB(-1.5, -1.5, -1.5, 3, 3, 3),
+"attribute_data": PackedByteArray("BAAEAP9/+v8EAPr//38EAAQABAD/f/r/BAD6//9/BADH//r/zH8EAMf/BADMf/r//3/6/wQABAD/fwQABAD6//9/+v8EAAQA/38EAAQA+v//fwQABAD6/wQABAD/f/r/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAABAAIAAAADAAEABAAFAAYABAAHAAUACAAJAAoACAALAAkADAANAA4ADAAPAA0AEAARABIAEAATABEAFAAVABYAFAAXABUA"),
+"material": SubResource("StandardMaterial3D_ro6gx"),
+"name": "Material.003",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP////8AAP//AAD//wAA////////AAAAAAAA//8AAAAAAAD///////8AAP//AAD//wAA/////wAAAAD/////AAAAAP+//////////7//////AAD/v///AAD///+///8AAP//AIAAAP////8AgP///////wCAAAAAAP//AIAAAAAAAABU1f//AAD//1TV//8AAAAAVNUAAAAA//9U1f////8AAP+/AAD//////78AAP//AAD/v/////////+//z//f/8//3//P/9//z//f////3////9/////f////3//fwAA/38AAP9/AAD/fwAA/3////9/////f////3///1RVVFVUVVRVVFVUVVRVVFX///9/////f////3////9/")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_ugfhx")
+
+[node name="gunBox" type="Area3D"]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 0, 0, 0)
+collision_layer = 16
+collision_mask = 4
+script = ExtResource("1_gxm03")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_y0y2w")
+
+[node name="Timer" type="Timer" parent="."]
+process_callback = 0
+wait_time = 34.0
+autostart = true
+
+[node name="Cube_004" type="MeshInstance3D" parent="."]
+mesh = SubResource("ArrayMesh_4xahv")
+skeleton = NodePath("")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
