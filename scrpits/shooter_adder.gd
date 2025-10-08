@@ -55,6 +55,9 @@ func spawn_shooter_in_area(spawn_area):
 	# Instance the new shooter
 	var new_shooter = shooter_scene.instantiate()
 	
+	# Set to PAUSABLE mode so it stops when game is paused
+	new_shooter.process_mode = Node.PROCESS_MODE_PAUSABLE
+	
 	# Add it to the spawn area
 	spawn_area.add_child(new_shooter)
 	

@@ -159,6 +159,10 @@ func spawn_enemy(enemy_type: String):
 		enemy_instance = enemy_scene.instantiate()
 		var spawn_pos = calculate_spawn_position()
 		enemy_instance.global_position = spawn_pos
+		
+		# Set enemy to PAUSABLE mode so it stops when game is paused
+		enemy_instance.process_mode = Node.PROCESS_MODE_PAUSABLE
+		
 		parent_node.add_child(enemy_instance)
 		
 		# Only print for bosses, not regular enemies

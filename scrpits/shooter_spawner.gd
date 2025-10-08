@@ -26,6 +26,9 @@ func spawn_shooter_adder():
 	# Instance the shooter_adder scene
 	var new_shooter_adder = shooter_adder_scene.instantiate()
 	
+	# Set to PAUSABLE mode so it stops when game is paused
+	new_shooter_adder.process_mode = Node.PROCESS_MODE_PAUSABLE
+	
 	# Add it to the scene
 	add_child(new_shooter_adder)
 	

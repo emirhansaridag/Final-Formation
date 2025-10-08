@@ -9,8 +9,7 @@ var is_pooled: bool = false
 
 # Boss-specific properties
 var is_boss: bool = true
-var boss_damage_multiplier: float = 3.0
-var boss_health_multiplier: float = 5.0  # Final boss has 5x health!
+var boss_health_multiplier: float = 10.0  # Final boss has 5x health!
 
 # Performance optimization
 var update_timer: float = 0.0

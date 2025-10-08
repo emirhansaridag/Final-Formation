@@ -30,6 +30,10 @@ func _create_initial_pool():
 
 func _create_new_object():
 	var obj = scene_resource.instantiate()
+	
+	# Set to PAUSABLE mode so it stops when game is paused
+	obj.process_mode = Node.PROCESS_MODE_PAUSABLE
+	
 	parent_node.add_child(obj)
 	
 	# Store original transform properties for proper reset

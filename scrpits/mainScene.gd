@@ -27,15 +27,32 @@ var is_game_won: bool = false
 # Popup scenes
 var game_over_scene: PackedScene = preload("res://scenes/game_over_scene.tscn")
 var you_win_scene: PackedScene = preload("res://scenes/you_win_screen.tscn")
+var pause_menu_scene: PackedScene = preload("res://scenes/pause_menu.tscn")
 var game_over_popup: Control = null
 var you_win_popup: Control = null
+var pause_menu_popup: Control = null
 
 # Performance optimization
 var camera_update_timer: float = 0.0
 var camera_update_interval: float
 
+# Music
+@onready var game_music: AudioStreamPlayer = null
+
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
+	
+	# Set this node to always process even when paused (so we can detect ESC to unpause)
+	process_mode = Node.PROCESS_MODE_ALWAYS
+	
+	# Set all game object nodes to PAUSABLE mode
+	_setup_pause_modes()
+	
+	# Setup game music
+	game_music = get_node_or_null("GameMusic")
+	if game_music:
+		game_music.play()
+		print("🎵 Game music started playing")
 	
 	# Get values from config safely and cache for performance
 	var config = Global.get_config()
@@ -81,12 +98,35 @@ func _ready():
 	
 	level_start_time = Time.get_unix_time_from_system()
 
+func _setup_pause_modes():
+	# Set all game object nodes to PAUSABLE so they stop when the game is paused
+	# mainScene itself is ALWAYS so it can handle pause input
+	var pausable_nodes = [
+		"adders",           # Shooter spawner
+		"boxes",            # Box spawner
+		"shooterSpawnArea", # Shooter area
+		"enemySpawnerArea", # Enemy spawner
+		"enemy_hit_spot",   # Hit detection
+		"ground"            # Just to be safe
+	]
+	
+	for node_name in pausable_nodes:
+		var node = get_node_or_null(node_name)
+		if node:
+			node.process_mode = Node.PROCESS_MODE_PAUSABLE
+			print("✅ Set ", node_name, " to PAUSABLE mode")
+	
+	# Keep game music playing when paused (optional - set to PAUSABLE if you want it to stop)
+	if game_music:
+		game_music.process_mode = Node.PROCESS_MODE_ALWAYS
+		print("✅ Set GameMusic to ALWAYS mode (continues during pause)")
+
 # Performance optimization: Cache config values and reduce update frequency
 var cached_camera_follow_speed: float
 var cached_camera_dead_zone: float
 
 func _process(delta):
-	# Don't update game if it's over or won
+	# Don't update game if it's over or won (but still allow pause)
 	if is_game_over or is_game_won:
 		return
 	
@@ -100,7 +140,17 @@ func _process(delta):
 	if wave_manager:
 		_display_level_progress()
 
+func _input(event):
+	# Handle pause input (works even when game is paused because mainScene has PROCESS_MODE_ALWAYS)
+	if event.is_action_pressed("ui_cancel"):  # ESC key
+		toggle_pause_menu()
+		get_viewport().set_input_as_handled()
+
 func _update_camera(delta: float):
+	# Don't update camera if paused
+	if get_tree().paused:
+		return
+	
 	# Smooth camera following logic using cached values for better performance
 	if camera and spawn_area:
 		# Calculate target camera position (only X axis)
@@ -169,6 +219,10 @@ func get_level_progress() -> float:
 
 # Time-based currency system
 func _update_currency_system(delta: float):
+	# Don't update currency if paused
+	if get_tree().paused:
+		return
+	
 	# Only award currency if the level is active and not completed
 	if wave_manager and not currency_awarded:
 		currency_timer += delta
@@ -243,3 +297,40 @@ func show_you_win_screen():
 	you_win_popup.process_mode = Node.PROCESS_MODE_ALWAYS
 	
 	print("📺 You Win screen displayed - Earned coins: ", earned_coins)
+
+
+func _on_pause_pressed():
+	toggle_pause_menu()
+
+func toggle_pause_menu():
+	if pause_menu_popup:
+		# Close pause menu
+		close_pause_menu()
+	else:
+		# Open pause menu
+		show_pause_menu()
+
+func show_pause_menu():
+	if pause_menu_popup or is_game_over or is_game_won:
+		return  # Don't show if already showing or if game ended
+	
+	# Create and add the pause menu popup
+	pause_menu_popup = pause_menu_scene.instantiate()
+	add_child(pause_menu_popup)
+	
+	# Connect close signal if available
+	if pause_menu_popup.has_signal("close_requested"):
+		pause_menu_popup.close_requested.connect(close_pause_menu)
+	
+	# Pause game (but keep rendering)
+	get_tree().paused = true
+	pause_menu_popup.process_mode = Node.PROCESS_MODE_ALWAYS
+	
+	print("⏸️ Game paused - Pause menu displayed")
+
+func close_pause_menu():
+	if pause_menu_popup:
+		pause_menu_popup.queue_free()
+		pause_menu_popup = null
+		get_tree().paused = false
+		print("▶️ Game resumed")

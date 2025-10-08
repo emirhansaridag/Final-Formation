@@ -1,7 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://be0tbn5dgviiu"]
+[gd_scene load_steps=8 format=3 uid="uid://be0tbn5dgviiu"]
 
 [ext_resource type="Script" uid="uid://mbygottuaipn" path="res://scrpits/main_menu.gd" id="1_ekxnf"]
 [ext_resource type="Texture2D" uid="uid://bdm8n5bjgkry3" path="res://textures/catBackground3.png" id="2_ekxnf"]
+[ext_resource type="AudioStream" uid="uid://c1v20ih4xs60o" path="res://music/Catsong.mp3" id="3_bqqt6"]
 
 [sub_resource type="StyleBoxEmpty" id="StyleBoxEmpty_1ajci"]
 
@@ -78,5 +79,10 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_bqqt6")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_lgwnu")
 flat = true
 
+[node name="MenuMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_bqqt6")
+autoplay = true
+
 [connection signal="button_down" from="playButton" to="." method="_on_play_button_button_down"]
+[connection signal="pressed" from="settingsButton" to="." method="_on_settings_button_pressed"]
 [connection signal="button_down" from="shopButton" to="." method="_on_shop_button_button_down"]

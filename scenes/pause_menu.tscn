@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://dy76tyh7qhqtx"]
+[gd_scene load_steps=7 format=3 uid="uid://dy76tyh7qhqtx"]
 
 [ext_resource type="Texture2D" uid="uid://bhy1mhuq81hha" path="res://textures/panel_brown.png" id="1_n87rw"]
+[ext_resource type="Script" uid="uid://bl637e5v8i7qa" path="res://scrpits/pause_menu.gd" id="1_v4r4p"]
 [ext_resource type="Texture2D" uid="uid://c56jb48j5j6a2" path="res://textures/—Pngtree—exit close button for game_6655002 (1).png" id="2_myx47"]
 [ext_resource type="Texture2D" uid="uid://dm3m428t133pf" path="res://textures/vecteezy_speaker-green-and-red-symbol-icon-set-sound-vector-icon_15416079-removebg-preview.png" id="3_kukqi"]
 [ext_resource type="Texture2D" uid="uid://4k0q5tvj6pe8" path="res://textures/button_credits.png" id="4_7l7mv"]
@@ -13,6 +14,7 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("1_v4r4p")
 
 [node name="bg_panel" type="TextureRect" parent="."]
 layout_mode = 1
@@ -164,3 +166,8 @@ UI Assets: Kenney
 Music: Dan Knoflicek, yd(OpenGameArt)"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[connection signal="pressed" from="close/close_button" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="muteUnmuteButton/unmuteButton" to="." method="_on_unmute_button_pressed"]
+[connection signal="pressed" from="muteUnmuteButton/muteButton" to="." method="_on_mute_button_pressed"]
+[connection signal="pressed" from="credits/creditsButton" to="." method="_on_credits_button_pressed"]

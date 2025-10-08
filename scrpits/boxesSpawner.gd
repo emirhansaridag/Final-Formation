@@ -32,6 +32,8 @@ func spawn_gun_box():
 	else:
 		# Fallback to normal instantiation
 		var new_gun_box = gun_box_scene.instantiate()
+		# Set to PAUSABLE mode so it stops when game is paused
+		new_gun_box.process_mode = Node.PROCESS_MODE_PAUSABLE
 		add_child(new_gun_box)
 		new_gun_box.global_position = spawn_position
 	

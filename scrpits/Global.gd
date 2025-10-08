@@ -28,7 +28,7 @@ var max_level_upgrades: int = 12
 var max_shooter_upgrades: int = 10
 
 # Stats
-var currency: int = 10000  # Start with small amount, earn through time
+var currency: int = 0  # Start with small amount, earn through time
 var enemies_killed: int = 0
 
 # Signals for UI updates

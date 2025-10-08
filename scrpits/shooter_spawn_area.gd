@@ -204,6 +204,10 @@ func _set_dragging_visual(is_dragging_state: bool):
 func spawn_shooter():
 	if shooters_in_area.size() < max_shooters:
 		var instance = shooter_scene.instantiate()
+		
+		# Set to PAUSABLE mode so it stops when game is paused
+		instance.process_mode = Node.PROCESS_MODE_PAUSABLE
+		
 		add_child(instance)
 		
 		# Find a safe spawn position that doesn't overlap with existing shooters

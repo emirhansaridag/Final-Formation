@@ -1,4 +1,4 @@
-[gd_scene load_steps=28 format=4 uid="uid://cx20qa4agtbam"]
+[gd_scene load_steps=29 format=4 uid="uid://cx20qa4agtbam"]
 
 [ext_resource type="Script" uid="uid://d060n7s1f65bq" path="res://scrpits/mainScene.gd" id="1_rxlee"]
 [ext_resource type="Texture2D" uid="uid://dy3lttotfq2o1" path="res://models/mainRoadTextured_Toon Road Texture.png" id="2_1jq6i"]
@@ -9,6 +9,7 @@
 [ext_resource type="PackedScene" uid="uid://crr58756vnux6" path="res://scenes/water.tscn" id="7_al2iq"]
 [ext_resource type="PackedScene" uid="uid://cv7w53clpa8r4" path="res://scenes/enemy_hit_spot.tscn" id="8_dmtm4"]
 [ext_resource type="Texture2D" uid="uid://bipwo14af2wey" path="res://textures/pause_6520121.png" id="9_1xypn"]
+[ext_resource type="AudioStream" uid="uid://njh2o7xiowkv" path="res://music/ZombiesAreComing.ogg" id="10_2n1xb"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e3o0j"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -303,21 +304,19 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.1722, 0, -0.493382)
 [node name="enemy_hit_spot" parent="." instance=ExtResource("8_dmtm4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.27562, 0, 9.94705e-08)
 
-[node name="pause_button" type="Control" parent="."]
-layout_mode = 3
-anchors_preset = 0
+[node name="TextureRect" type="TextureRect" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource("9_1xypn")
+expand_mode = 1
 
-[node name="pause" type="Button" parent="pause_button"]
-layout_mode = 1
+[node name="pause" type="Button" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
 flat = true
 
-[node name="TextureRect" type="TextureRect" parent="pause_button"]
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
-texture = ExtResource("9_1xypn")
-expand_mode = 1
+[node name="GameMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_2n1xb")
+
+[connection signal="pressed" from="pause" to="." method="_on_pause_pressed"]

@@ -1,0 +1,62 @@
+extends Control
+
+signal close_requested
+
+@onready var credits_texts = $creditsTexts
+
+func _ready():
+	# Connect button signals
+	var close_btn = $close/close_button
+	var unmute_btn = $muteUnmuteButton/unmuteButton
+	var mute_btn = $muteUnmuteButton/muteButton
+	var credits_btn = $credits/creditsButton
+	
+	if close_btn:
+		close_btn.pressed.connect(_on_close_button_pressed)
+	if unmute_btn:
+		unmute_btn.pressed.connect(_on_unmute_button_pressed)
+	if mute_btn:
+		mute_btn.pressed.connect(_on_mute_button_pressed)
+	if credits_btn:
+		credits_btn.pressed.connect(_on_credits_button_pressed)
+	
+	# Hide credits by default
+	if credits_texts:
+		credits_texts.visible = false
+	
+	# Update mute button visibility based on current audio state
+	_update_mute_buttons()
+
+func _on_close_button_pressed():
+	# Emit signal to close the pause menu
+	close_requested.emit()
+	print("⏸️ Pause menu close button pressed")
+
+func _on_unmute_button_pressed():
+	# Unmute all audio
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), false)
+	_update_mute_buttons()
+	print("🔊 Audio unmuted")
+
+func _on_mute_button_pressed():
+	# Mute all audio
+	AudioServer.set_bus_mute(AudioServer.get_bus_index("Master"), true)
+	_update_mute_buttons()
+	print("🔇 Audio muted")
+
+func _on_credits_button_pressed():
+	# Toggle credits visibility
+	if credits_texts:
+		credits_texts.visible = !credits_texts.visible
+		print("📜 Credits toggled: ", credits_texts.visible)
+
+func _update_mute_buttons():
+	# Update button visibility based on mute state
+	var is_muted = AudioServer.is_bus_mute(AudioServer.get_bus_index("Master"))
+	var unmute_btn = $muteUnmuteButton/unmuteButton
+	var mute_btn = $muteUnmuteButton/muteButton
+	
+	if unmute_btn:
+		unmute_btn.visible = is_muted
+	if mute_btn:
+		mute_btn.visible = !is_muted

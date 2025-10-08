@@ -233,6 +233,8 @@ func shoot():
 		instance.dir = rotation.y
 		instance.spawn_pos = global_position
 		instance.spawn_rot = global_rotation
+		# Set to PAUSABLE mode so it stops when game is paused
+		instance.process_mode = Node.PROCESS_MODE_PAUSABLE
 		get_tree().current_scene.add_child(instance)
 
 
