@@ -27,6 +27,9 @@ var is_in_area = false  # Track if shooter is inside an area
 var spawn_area = null  # Reference to the spawn area this shooter belongs to
 var move_to_center_speed = 1.5  # Speed for moving to center (reduced to prevent spazzing)
 
+# Touch input tracking (for mobile)
+var active_touch_index: int = -1  # Track which finger is dragging this shooter
+
 func _ready():
 	input_pickable = true
 	# Connect timer signal if not already connected
@@ -44,11 +47,49 @@ func _ready():
 	_setup_click_detection()
 
 func _input(event):
-	if event is InputEventMouseButton:
+	# Handle touch input (mobile)
+	if event is InputEventScreenTouch:
+		if event.pressed:
+			# Touch started - check if this shooter was tapped
+			if not is_dragging and active_touch_index == -1:
+				if _check_touch_at_position(event.position):
+					# Always emit signal to notify area that this shooter was clicked
+					shooter_clicked.emit(self)
+					
+					# Only allow individual dragging if NOT in an area
+					if not is_in_area:
+						is_dragging = true
+						active_touch_index = event.index
+						drag_start_position = global_position
+						drag_start_mouse_position = event.position
+						last_mouse_position = event.position
+						print("📱 Touch drag started on shooter - Touch index: ", event.index)
+		else:
+			# Touch ended - stop dragging if this was our active touch
+			if active_touch_index == event.index:
+				is_dragging = false
+				active_touch_index = -1
+				mouse_velocity = Vector2.ZERO
+				print("📱 Touch drag ended - Touch index: ", event.index)
+	
+	# Handle touch drag movement (mobile)
+	elif event is InputEventScreenDrag:
+		if is_dragging and active_touch_index == event.index and not is_in_area:
+			var current_touch_pos = event.position
+			var delta_time = get_process_delta_time()
+			if delta_time > 0:  # Avoid division by zero
+				mouse_velocity = (current_touch_pos - last_mouse_position) / delta_time
+			last_mouse_position = current_touch_pos
+			
+			# Update drag target with reduced frequency for better performance
+			_update_drag_target_cached()
+	
+	# Handle mouse input (desktop/editor)
+	elif event is InputEventMouseButton:
 		if event.button_index == MOUSE_BUTTON_LEFT:
 			if event.pressed:
 				# Use optimized raycasting with reduced frequency
-				if not is_dragging:
+				if not is_dragging and active_touch_index == -1:
 					if _check_mouse_click():
 						# Always emit signal to notify area that this shooter was clicked
 						shooter_clicked.emit(self)
@@ -64,7 +105,7 @@ func _input(event):
 				mouse_velocity = Vector2.ZERO
 	
 	# Track mouse movement for velocity calculation (only when actually dragging)
-	if event is InputEventMouseMotion and is_dragging and not is_in_area:
+	elif event is InputEventMouseMotion and is_dragging and not is_in_area and active_touch_index == -1:
 		var current_mouse_pos = get_viewport().get_mouse_position()
 		var delta_time = get_process_delta_time()
 		if delta_time > 0:  # Avoid division by zero
@@ -200,6 +241,24 @@ func _check_mouse_click() -> bool:
 		var mouse_pos = get_viewport().get_mouse_position()
 		var from = camera.project_ray_origin(mouse_pos)
 		var to = from + camera.project_ray_normal(mouse_pos) * 1000
+		
+		var space_state = get_world_3d().direct_space_state
+		var query = PhysicsRayQueryParameters3D.create(from, to)
+		query.collision_mask = collision_mask
+		query.collide_with_areas = false
+		query.collide_with_bodies = true
+		
+		var result = space_state.intersect_ray(query)
+		return result and result.collider == self
+	
+	return false
+
+# Check if a touch at given position hits this shooter (for mobile)
+func _check_touch_at_position(touch_pos: Vector2) -> bool:
+	var camera = get_viewport().get_camera_3d()
+	if camera:
+		var from = camera.project_ray_origin(touch_pos)
+		var to = from + camera.project_ray_normal(touch_pos) * 1000
 		
 		var space_state = get_world_3d().direct_space_state
 		var query = PhysicsRayQueryParameters3D.create(from, to)

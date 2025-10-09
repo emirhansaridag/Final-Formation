@@ -25,23 +25,41 @@ func _setup_pools():
 		
 	print("🏊 Setting up object pools with scene: ", current_scene.name)
 	
-	# Create projectile pool with smaller initial sizes to reduce startup lag
-	var projectile_scene = preload("res://scenes/projectile.tscn")
-	projectile_pool = ObjectPool.new(projectile_scene, 5, config.max_projectiles)  # Start with just 5
-	projectile_pool.initialize(current_scene)
-	add_child(projectile_pool)
+	# If pools already exist, update their parent nodes instead of creating new pools
+	if projectile_pool:
+		projectile_pool.update_parent_node(current_scene)
+		print("  ↻ Updated projectile pool parent node")
+	else:
+		# Create projectile pool with smaller initial sizes to reduce startup lag
+		var projectile_scene = preload("res://scenes/projectile.tscn")
+		projectile_pool = ObjectPool.new(projectile_scene, 5, config.max_projectiles)  # Start with just 5
+		projectile_pool.initialize(current_scene)
+		add_child(projectile_pool)
+		print("  ✅ Created projectile pool")
 	
-	# Create enemy pool
-	var enemy_scene = preload("res://scenes/enemy.tscn")
-	enemy_pool = ObjectPool.new(enemy_scene, 3, config.max_enemies)  # Start with just 3
-	enemy_pool.initialize(current_scene)
-	add_child(enemy_pool)
+	# If pools already exist, update their parent nodes instead of creating new pools
+	if enemy_pool:
+		enemy_pool.update_parent_node(current_scene)
+		print("  ↻ Updated enemy pool parent node")
+	else:
+		# Create enemy pool
+		var enemy_scene = preload("res://scenes/enemy.tscn")
+		enemy_pool = ObjectPool.new(enemy_scene, 3, config.max_enemies)  # Start with just 3
+		enemy_pool.initialize(current_scene)
+		add_child(enemy_pool)
+		print("  ✅ Created enemy pool")
 	
-	# Create gun box pool
-	var gun_box_scene = preload("res://scenes/gun_box.tscn")
-	gun_box_pool = ObjectPool.new(gun_box_scene, 2, 20)  # Start with just 2
-	gun_box_pool.initialize(current_scene)
-	add_child(gun_box_pool)
+	# If pools already exist, update their parent nodes instead of creating new pools
+	if gun_box_pool:
+		gun_box_pool.update_parent_node(current_scene)
+		print("  ↻ Updated gun box pool parent node")
+	else:
+		# Create gun box pool
+		var gun_box_scene = preload("res://scenes/gun_box.tscn")
+		gun_box_pool = ObjectPool.new(gun_box_scene, 2, 20)  # Start with just 2
+		gun_box_pool.initialize(current_scene)
+		add_child(gun_box_pool)
+		print("  ✅ Created gun box pool")
 	
 	pools_ready = true
 	print("✅ Object pools initialized successfully")

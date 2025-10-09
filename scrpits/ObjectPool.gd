@@ -22,17 +22,29 @@ func initialize(parent: Node):
 	parent_node = parent
 	_create_initial_pool()
 
+# Update parent node when scene changes (for persistent pools)
+func update_parent_node(new_parent: Node):
+	parent_node = new_parent
+	print("  🔄 ObjectPool parent node updated to: ", new_parent.name)
+
 func _create_initial_pool():
 	for i in initial_pool_size:
 		var obj = _create_new_object()
-		_deactivate_object(obj)
-		available_objects.append(obj)
+		if obj:  # Only add if object was created successfully
+			_deactivate_object(obj)
+			available_objects.append(obj)
 
 func _create_new_object():
 	var obj = scene_resource.instantiate()
 	
 	# Set to PAUSABLE mode so it stops when game is paused
 	obj.process_mode = Node.PROCESS_MODE_PAUSABLE
+	
+	# Check if parent_node is still valid before adding child
+	if not is_instance_valid(parent_node):
+		push_error("❌ ObjectPool: parent_node is not valid! Cannot create object.")
+		obj.queue_free()
+		return null
 	
 	parent_node.add_child(obj)
 	
@@ -57,7 +69,11 @@ func _activate_object(obj):
 	obj.visible = true
 	
 	# Re-enable collision for activated objects (restore original collision settings)
+	# This MUST happen before reset_object to ensure collision is properly restored
 	_enable_collision_recursive(obj)
+	
+	# Verify collision was properly restored (critical for enemy detection)
+	_verify_collision_restored(obj)
 	
 	# Reset any custom properties if the object has a reset method
 	if obj.has_method("reset_object"):
@@ -178,15 +194,62 @@ func _disable_collision_recursive(node: Node):
 		_disable_collision_recursive(child)
 
 func _enable_collision_recursive(node: Node):
-	# Re-enable collision for this node
-	if node.has_method("set_collision_layer") and node.has_meta("original_collision_layer"):
-		node.set_collision_layer(node.get_meta("original_collision_layer"))
-	if node.has_method("set_collision_mask") and node.has_meta("original_collision_mask"):
-		node.set_collision_mask(node.get_meta("original_collision_mask"))
+	# Re-enable collision for this node with robust fallback
+	if node.has_method("set_collision_layer"):
+		if node.has_meta("original_collision_layer"):
+			node.set_collision_layer(node.get_meta("original_collision_layer"))
+		else:
+			# CRITICAL FIX: If metadata is missing, restore from scene type
+			# This ensures collision is ALWAYS restored even if metadata fails
+			if node is Area3D:
+				# Check if this is an enemy Area3D (child of enemy node)
+				var parent = node.get_parent()
+				if parent and parent is Node3D:
+					var parent_name = parent.name.to_lower()
+					if parent_name.contains("enemy") or parent_name.contains("stickman") or parent_name.contains("boss"):
+						node.set_collision_layer(16)  # Enemy collision layer
+						print("⚠️ Restored missing collision_layer for enemy Area3D: ", parent.name)
+	
+	if node.has_method("set_collision_mask"):
+		if node.has_meta("original_collision_mask"):
+			node.set_collision_mask(node.get_meta("original_collision_mask"))
+		else:
+			# CRITICAL FIX: Restore collision mask even if metadata is missing
+			if node is Area3D:
+				var parent = node.get_parent()
+				if parent and parent is Node3D:
+					var parent_name = parent.name.to_lower()
+					if parent_name.contains("enemy") or parent_name.contains("stickman") or parent_name.contains("boss"):
+						node.set_collision_mask(4)  # Enemy collision mask
+						print("⚠️ Restored missing collision_mask for enemy Area3D: ", parent.name)
 	
 	# Recursively re-enable collision for children
 	for child in node.get_children():
 		_enable_collision_recursive(child)
+
+# Verify collision was properly restored (debugging and safety check)
+func _verify_collision_restored(node: Node):
+	# Check main node
+	if node.has_method("get_collision_layer"):
+		var layer = node.get_collision_layer()
+		if layer == 0:
+			push_warning("⚠️ ObjectPool: Collision layer is 0 for node: ", node.name)
+	
+	# Check child Area3D nodes (where enemy collision actually happens)
+	for child in node.get_children():
+		if child is Area3D:
+			var layer = child.get_collision_layer()
+			var mask = child.get_collision_mask()
+			if layer == 0 or mask == 0:
+				push_error("❌ CRITICAL: Enemy Area3D collision not restored! Layer:", layer, " Mask:", mask, " Parent:", node.name)
+				# Force restore if this happens
+				var parent_name = node.name.to_lower()
+				if parent_name.contains("enemy") or parent_name.contains("stickman") or parent_name.contains("boss"):
+					child.set_collision_layer(16)
+					child.set_collision_mask(4)
+					print("🔧 EMERGENCY FIX: Forced collision restoration for ", node.name)
+		# Recursively check deeper children
+		_verify_collision_restored(child)
 
 # Clean up invalid objects from pools
 func cleanup_invalid_objects():

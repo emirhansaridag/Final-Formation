@@ -42,6 +42,12 @@ var camera_update_interval: float
 func _ready():
 	Input.mouse_mode = Input.MOUSE_MODE_VISIBLE
 	
+	# Reset shooter level to starter level at the beginning of each level
+	Global.shooter_level = Global.shooter_starter_level
+	
+	# Print shooter level at the start
+	print("🎮 SHOOTER LEVEL: ", Global.shooter_level)
+	
 	# Set this node to always process even when paused (so we can detect ESC to unpause)
 	process_mode = Node.PROCESS_MODE_ALWAYS
 	
@@ -65,13 +71,18 @@ func _ready():
 	cached_camera_dead_zone = camera_dead_zone
 	
 	# Initialize pool manager as singleton if it doesn't exist
-	if not get_node_or_null("/root/PoolManager"):
-		var pool_manager = preload("res://scrpits/PoolManager.gd").new()
+	var pool_manager = get_node_or_null("/root/PoolManager")
+	if not pool_manager:
+		pool_manager = preload("res://scrpits/PoolManager.gd").new()
 		pool_manager.name = "PoolManager"
 		get_tree().root.add_child(pool_manager)
+		print("✅ PoolManager created as singleton")
+	else:
+		# Pool manager already exists, reinitialize it for the new scene
+		pool_manager._setup_pools()
+		print("↻ PoolManager reinitialized for new scene")
 	
 	# Clean up any invalid objects that might exist from previous scenes
-	var pool_manager = get_node_or_null("/root/PoolManager")
 	if pool_manager and pool_manager.has_method("cleanup_invalid_objects"):
 		pool_manager.cleanup_invalid_objects()
 	

@@ -12,7 +12,7 @@ const SECTION_UPGRADES = "upgrades"
 const SECTION_STATS = "stats"
 
 # Default values
-const DEFAULT_CURRENCY = 10000
+const DEFAULT_CURRENCY = 0
 const DEFAULT_SHOOTER_LEVEL = 1
 
 # ConfigFile instance
@@ -29,7 +29,7 @@ func _ready():
 func save_game():
 	# Player data
 	save_file.set_value(SECTION_PLAYER, "currency", Global.currency)
-	save_file.set_value(SECTION_PLAYER, "shooter_level", Global.shooter_level)
+	# shooter_level is not saved - it resets to shooter_starter_level each level
 	save_file.set_value(SECTION_PLAYER, "shooter_starter_level", Global.shooter_starter_level)
 	save_file.set_value(SECTION_PLAYER, "max_shooters", Global.max_shooters)
 	
@@ -78,7 +78,7 @@ func load_game():
 	
 	# Load player data
 	Global.currency = save_file.get_value(SECTION_PLAYER, "currency", DEFAULT_CURRENCY)
-	Global.shooter_level = save_file.get_value(SECTION_PLAYER, "shooter_level", DEFAULT_SHOOTER_LEVEL)
+	# shooter_level is not loaded - it resets to shooter_starter_level each level
 	Global.shooter_starter_level = save_file.get_value(SECTION_PLAYER, "shooter_starter_level", DEFAULT_SHOOTER_LEVEL)
 	Global.max_shooters = save_file.get_value(SECTION_PLAYER, "max_shooters", 3)
 	
@@ -102,7 +102,7 @@ func load_game():
 ## Set default values for new game
 func set_default_values():
 	Global.currency = DEFAULT_CURRENCY
-	Global.shooter_level = DEFAULT_SHOOTER_LEVEL
+	# shooter_level resets each level, so we don't set it here
 	Global.shooter_starter_level = DEFAULT_SHOOTER_LEVEL
 	Global.max_shooters = 3
 	
