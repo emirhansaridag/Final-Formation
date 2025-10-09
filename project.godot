@@ -10,7 +10,7 @@ config_version=5
 
 [application]
 
-config/name="mobileGame"
+config/name="Final Formation"
 run/main_scene="uid://be0tbn5dgviiu"
 config/features=PackedStringArray("4.4", "Forward Plus")
 config/icon="res://icon.svg"
@@ -26,6 +26,9 @@ SaveDebugHelper="*res://scrpits/SaveDebugHelper.gd"
 
 window/size/viewport_width=720
 window/size/viewport_height=960
+window/size/mode=3
+window/stretch/mode="viewport"
+window/stretch/aspect="expand"
 window/handheld/orientation=1
 
 [dotnet]
@@ -39,3 +42,7 @@ pointing/emulate_touch_from_mouse=true
 [physics]
 
 3d/physics_engine="Jolt Physics"
+
+[rendering]
+
+textures/vram_compression/import_etc2_astc=true

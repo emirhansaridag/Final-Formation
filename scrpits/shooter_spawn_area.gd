@@ -102,7 +102,7 @@ func _physics_process(delta):
 		# Smooth interpolation instead of instant movement for less jank
 		if abs(distance) > 0.01:
 			# Use lerp for smooth movement
-			var move_speed = 10.0  # Adjust this to control smoothness
+			var move_speed = 15.0  # Adjust this to control smoothness
 			var new_x = lerp(current_x, drag_target_x, move_speed * delta)
 			global_position.x = new_x
 	

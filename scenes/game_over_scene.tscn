@@ -15,16 +15,17 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ny7m6")
 
-[node name="TextureRect" type="TextureRect" parent="."]
-layout_mode = 1
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -299.0
+offset_left = -300.0
 offset_top = -197.0
-offset_right = -259.0
+offset_right = -260.0
 offset_bottom = -157.0
 grow_horizontal = 2
 grow_vertical = 2
@@ -32,60 +33,56 @@ scale = Vector2(15, 10)
 texture = ExtResource("1_64dwf")
 expand_mode = 1
 
-[node name="homeButton" type="Button" parent="."]
-layout_mode = 1
+[node name="homeButton" type="Button" parent="CanvasLayer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
 anchor_right = 0.5
 anchor_bottom = 0.5
-offset_left = -66.0
+offset_left = -67.0
 offset_top = 69.0
-offset_right = 68.0
+offset_right = 67.0
 offset_bottom = 169.0
 grow_horizontal = 2
 grow_vertical = 2
 flat = true
 
-[node name="Label" type="Label" parent="."]
-layout_mode = 1
+[node name="Label" type="Label" parent="CanvasLayer"]
 anchors_preset = -1
 anchor_left = 0.755
 anchor_top = 0.583
 anchor_right = 0.755
 anchor_bottom = 0.583
-offset_left = -50.6
+offset_left = -51.6
 offset_top = -11.68
-offset_right = 50.4
+offset_right = 49.4
 offset_bottom = 11.32
 text = "Coins Earned"
 
-[node name="coins" type="Label" parent="."]
-layout_mode = 1
+[node name="coins" type="Label" parent="CanvasLayer"]
 anchors_preset = -1
 anchor_left = 0.254
 anchor_top = 2.429
 anchor_right = 0.254
 anchor_bottom = 2.429
-offset_left = 288.12
-offset_top = -1739.84
-offset_right = 398.12
-offset_bottom = -1716.84
+offset_left = 290.12
+offset_top = -1742.84
+offset_right = 400.12
+offset_bottom = -1719.84
 text = "[earned coins]"
 
-[node name="coin" type="TextureRect" parent="."]
-layout_mode = 1
+[node name="coin" type="TextureRect" parent="CanvasLayer"]
 anchors_preset = -1
-anchor_left = 0.837
-anchor_top = 0.631
-anchor_right = 0.837
-anchor_bottom = 0.631
-offset_left = -14.64
-offset_top = -16.76
-offset_right = 1009.36
-offset_bottom = 1007.24
+anchor_left = 0.874
+anchor_top = 0.632
+anchor_right = 0.874
+anchor_bottom = 0.632
+offset_left = -15.28
+offset_top = -15.72
+offset_right = 1008.72
+offset_bottom = 1008.28
 scale = Vector2(0.03, 0.03)
 texture = ExtResource("3_k0nam")
 expand_mode = 1
 
-[connection signal="pressed" from="homeButton" to="." method="_on_home_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/homeButton" to="." method="_on_home_button_pressed"]

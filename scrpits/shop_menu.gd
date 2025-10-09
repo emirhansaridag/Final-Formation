@@ -1,25 +1,25 @@
 extends Control
 
 # UI References
-@onready var damage_upgrade_bar = $upgrades/damage/dmgUpgradeBar
-@onready var damage_upgrade_button = $upgrades/damage/dmgUpButton
-@onready var damage_cost_label = $upgrades/damage/dmgCost
+@onready var damage_upgrade_bar = $CanvasLayer/upgrades/damage/dmgUpgradeBar
+@onready var damage_upgrade_button = $CanvasLayer/upgrades/damage/dmgUpButton
+@onready var damage_cost_label = $CanvasLayer/upgrades/damage/dmgCost
 
-@onready var attack_speed_upgrade_bar = $upgrades/attackSpeed/attackSpeedUpgradeBar
-@onready var attack_speed_upgrade_button = $upgrades/attackSpeed/attackSpeedUpButton
-@onready var attack_speed_cost_label = $upgrades/attackSpeed/attackSpeedCost
+@onready var attack_speed_upgrade_bar = $CanvasLayer/upgrades/attackSpeed/attackSpeedUpgradeBar
+@onready var attack_speed_upgrade_button = $CanvasLayer/upgrades/attackSpeed/attackSpeedUpButton
+@onready var attack_speed_cost_label = $CanvasLayer/upgrades/attackSpeed/attackSpeedCost
 
-@onready var level_upgrade_bar = $upgrades/level/levelUpgradeBar
-@onready var level_upgrade_button = $upgrades/level/levelUpButton
-@onready var level_cost_label = $upgrades/level/levelCost
+@onready var level_upgrade_bar = $CanvasLayer/upgrades/level/levelUpgradeBar
+@onready var level_upgrade_button = $CanvasLayer/upgrades/level/levelUpButton
+@onready var level_cost_label = $CanvasLayer/upgrades/level/levelCost
 
-@onready var max_shooter_upgrade_bar = $upgrades/maxShooter/maxShooterUpgradeBar
-@onready var max_shooter_upgrade_button = $upgrades/maxShooter/maxShooterUpgradeButton
-@onready var max_shooter_cost_label = $upgrades/maxShooter/maxShooterUpgradeCost
+@onready var max_shooter_upgrade_bar = $CanvasLayer/upgrades/maxShooter/maxShooterUpgradeBar
+@onready var max_shooter_upgrade_button = $CanvasLayer/upgrades/maxShooter/maxShooterUpgradeButton
+@onready var max_shooter_cost_label = $CanvasLayer/upgrades/maxShooter/maxShooterUpgradeCost
 
 # Navigation and currency UI
-@onready var back_button = $backButton
-@onready var currency_label = $currencyDisplay/currencyLabel
+@onready var back_button = $CanvasLayer/backButton
+@onready var currency_label = $CanvasLayer/currencyDisplay/currencyLabel
 
 func _ready():
 	# Connect upgrade buttons

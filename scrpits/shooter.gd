@@ -142,7 +142,7 @@ func _physics_process(delta):
 			
 			# Move toward target position smoothly
 			if abs(distance) > 0.01:
-				velocity.x = distance * 5.0  # Direct value for responsiveness
+				velocity.x = distance * 8.0  # Direct value for responsiveness
 			else:
 				velocity.x = 0
 		else:

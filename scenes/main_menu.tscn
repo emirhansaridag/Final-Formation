@@ -21,8 +21,9 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_ekxnf")
 
-[node name="background" type="TextureRect" parent="."]
-layout_mode = 1
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="background" type="TextureRect" parent="CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -31,8 +32,7 @@ grow_vertical = 2
 texture = ExtResource("2_ekxnf")
 expand_mode = 1
 
-[node name="playButton" type="Button" parent="."]
-layout_mode = 1
+[node name="playButton" type="Button" parent="CanvasLayer"]
 anchors_preset = -1
 anchor_left = 0.5
 anchor_top = 0.91
@@ -47,8 +47,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_1ajci")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_ekxnf")
 flat = true
 
-[node name="settingsButton" type="Button" parent="."]
-layout_mode = 1
+[node name="settingsButton" type="Button" parent="CanvasLayer"]
 anchors_preset = -1
 anchor_left = 0.158
 anchor_top = 0.921
@@ -62,8 +61,7 @@ theme_override_styles/focus = SubResource("StyleBoxEmpty_bqqt6")
 theme_override_styles/pressed = SubResource("StyleBoxEmpty_lgwnu")
 flat = true
 
-[node name="shopButton" type="Button" parent="."]
-layout_mode = 1
+[node name="shopButton" type="Button" parent="CanvasLayer"]
 anchors_preset = -1
 anchor_left = 0.837
 anchor_top = 0.914
@@ -83,6 +81,6 @@ flat = true
 stream = ExtResource("3_bqqt6")
 autoplay = true
 
-[connection signal="button_down" from="playButton" to="." method="_on_play_button_button_down"]
-[connection signal="pressed" from="settingsButton" to="." method="_on_settings_button_pressed"]
-[connection signal="button_down" from="shopButton" to="." method="_on_shop_button_button_down"]
+[connection signal="button_down" from="CanvasLayer/playButton" to="." method="_on_play_button_button_down"]
+[connection signal="pressed" from="CanvasLayer/settingsButton" to="." method="_on_settings_button_pressed"]
+[connection signal="button_down" from="CanvasLayer/shopButton" to="." method="_on_shop_button_button_down"]

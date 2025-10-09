@@ -187,8 +187,10 @@ environment = SubResource("Environment_qlmbs")
 transform = Transform3D(-0.866025, -0.433013, 0.25, 0, 0.5, 0.866025, -0.5, 0.75, -0.433013, 0, 0.012044, 0)
 shadow_enabled = true
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-4.37114e-08, -0.702898, 0.71129, -2.72005e-15, 0.71129, 0.702898, -1, 3.07247e-08, -3.10915e-08, 4.57892, 7.18028, 2.17283e-08)
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer"]
+transform = Transform3D(1, 1.93475e-15, 1.91192e-15, -2.72005e-15, 0.71129, 0.702898, 0, -0.702898, 0.71129, -2.21879e-07, 7.18028, 5.58597)
 current = true
 
 [node name="ground" type="StaticBody3D" parent="."]

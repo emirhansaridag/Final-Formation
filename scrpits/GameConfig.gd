@@ -24,7 +24,7 @@ class_name GameConfig
 
 # Gun Box Configuration
 @export_group("Gun Box Settings")
-@export var gun_box_health: float = 150.0
+@export var gun_box_health: float = 200.0
 @export var gun_box_speed: float = 3.0
 @export var gun_box_spawn_interval: float = 30.0
 @export var shooter_spawner_interval: float = 1.0
@@ -58,10 +58,10 @@ class_name GameConfig
 @export var serat_boss_start_time: float = 120.0  # 2 minutes (120 seconds)
 @export var aras_boss_start_time: float = 60.0  # 1 minute (60 seconds)
 @export var burak_boss_start_time: float = 180.0  # 3 minutes (180 seconds)
-@export var stickman_spawn_rate: float = 0.3  # Spawn every 4 seconds
-@export var serat_boss_spawn_rate: float = 4.0  # Spawn every 8 seconds
-@export var aras_boss_spawn_rate: float = 5.0  # Spawn every 10 seconds
-@export var burak_boss_spawn_rate: float = 7.0  # Spawn every 12 seconds
+@export var stickman_spawn_rate: float = 0.2  # Spawn every 4 seconds
+@export var serat_boss_spawn_rate: float = 3.0  # Spawn every 8 seconds
+@export var aras_boss_spawn_rate: float = 4.0  # Spawn every 10 seconds
+@export var burak_boss_spawn_rate: float = 5.0  # Spawn every 12 seconds
 
 # Performance Settings - Optimized for mobile
 @export_group("Performance Settings")

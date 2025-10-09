@@ -1,7 +1,7 @@
 extends Control
 
-@onready var level1 = $levelNode
-@onready var level2 = $levelNode2
+@onready var level1 = $CanvasLayer/levelNode
+@onready var level2 = $CanvasLayer/levelNode2
 
 var levelNum: int
 

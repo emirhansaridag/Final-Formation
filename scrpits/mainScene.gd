@@ -1,7 +1,7 @@
 extends Node3D
 
 # Camera following variables
-@onready var camera = $Camera3D
+@onready var camera = $CanvasLayer/Camera3D
 @onready var spawn_area = $shooterSpawnArea
 @onready var enemy_spawner_area = $enemySpawnerArea
 @onready var enemy_hit_spot = $enemy_hit_spot

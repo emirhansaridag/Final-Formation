@@ -16,8 +16,13 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_v4r4p")
 
-[node name="bg_panel" type="TextureRect" parent="."]
-layout_mode = 1
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="bg_panel" type="TextureRect" parent="CanvasLayer"]
 anchors_preset = 8
 anchor_left = 0.5
 anchor_top = 0.5
@@ -33,21 +38,20 @@ scale = Vector2(10, 10)
 texture = ExtResource("1_n87rw")
 expand_mode = 1
 
-[node name="close" type="TextureRect" parent="."]
+[node name="close" type="TextureRect" parent="CanvasLayer/bg_panel"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.758
-anchor_top = 0.299
-anchor_right = 0.758
-anchor_bottom = 0.299
-offset_left = -33.76
-offset_top = -34.04
-offset_right = 66.24
-offset_bottom = 65.96
-scale = Vector2(0.7, 0.7)
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -4.40057
+offset_top = -3.50021
+offset_right = 95.5994
+offset_bottom = 96.4998
+grow_horizontal = 0
+scale = Vector2(0.08, 0.08)
 texture = ExtResource("2_myx47")
 
-[node name="close_button" type="Button" parent="close"]
+[node name="close_button" type="Button" parent="CanvasLayer/bg_panel/close"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -62,112 +66,115 @@ grow_horizontal = 2
 grow_vertical = 2
 flat = true
 
-[node name="muteUnmuteButton" type="TextureRect" parent="."]
+[node name="muteUnmuteButton" type="TextureRect" parent="CanvasLayer/bg_panel"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.4
-anchor_top = 0.366
-anchor_right = 0.4
-anchor_bottom = 0.366
-offset_left = -106.0
-offset_top = -53.36
-offset_right = 601.0
-offset_bottom = 299.64
+offset_top = 0.600021
+offset_right = 80.0
+offset_bottom = 41.6
 scale = Vector2(0.3, 0.3)
 texture = ExtResource("3_kukqi")
+expand_mode = 1
 
-[node name="unmuteButton" type="Button" parent="muteUnmuteButton"]
+[node name="unmuteButton" type="Button" parent="CanvasLayer/bg_panel/muteUnmuteButton"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.269
+anchors_preset = 4
 anchor_top = 0.5
-anchor_right = 0.269
 anchor_bottom = 0.5
-offset_left = -127.183
-offset_top = -119.5
-offset_right = 126.817
-offset_bottom = 130.5
+offset_left = 9.0
+offset_top = -12.5
+offset_right = 36.0
+offset_bottom = 16.5
+grow_vertical = 2
 flat = true
 
-[node name="muteButton" type="Button" parent="muteUnmuteButton"]
+[node name="muteButton" type="Button" parent="CanvasLayer/bg_panel/muteUnmuteButton"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.726
-anchor_top = 0.516
-anchor_right = 0.726
-anchor_bottom = 0.516
-offset_left = -129.949
-offset_top = -122.148
-offset_right = 124.051
-offset_bottom = 127.852
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -36.0
+offset_top = -12.5
+offset_right = -8.0
+offset_bottom = 16.5
+grow_horizontal = 0
+grow_vertical = 2
 flat = true
 
-[node name="credits" type="TextureRect" parent="."]
+[node name="credits" type="TextureRect" parent="CanvasLayer/bg_panel"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.367
-anchor_top = 0.488
-anchor_right = 0.367
-anchor_bottom = 0.488
-offset_left = -70.24
-offset_top = -25.48
-offset_right = 109.76
-offset_bottom = 40.52
-scale = Vector2(0.78, 0.78)
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 2.6
+offset_top = -4.2
+offset_right = 182.6
+offset_bottom = 61.8
+grow_vertical = 2
+scale = Vector2(0.075, 0.075)
 texture = ExtResource("4_7l7mv")
 
-[node name="creditsButton" type="Button" parent="credits"]
+[node name="creditsButton" type="Button" parent="CanvasLayer/bg_panel/credits"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 0.5
-anchor_top = 0.508
-anchor_right = 0.5
-anchor_bottom = 0.508
-offset_left = -91.0
-offset_top = -33.528
-offset_right = 92.0
-offset_bottom = 33.472
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 2.66667
+offset_top = -31.6667
+offset_right = 185.667
+offset_bottom = 35.3333
+grow_vertical = 2
 flat = true
 
-[node name="creditsTexts" type="Control" parent="."]
+[node name="creditsTexts" type="Control" parent="CanvasLayer/bg_panel"]
 visible = false
-layout_mode = 3
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="TextureRect" type="TextureRect" parent="creditsTexts"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 8.725
-anchor_top = 11.712
-anchor_right = 8.725
-anchor_bottom = 11.712
-offset_left = -232.0
-offset_top = -54.48
-offset_right = -42.0
-offset_bottom = -9.48004
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_top = -6.0
+offset_bottom = 6.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer/bg_panel/creditsTexts"]
+layout_mode = 1
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -4.1
+offset_top = -5.0
+offset_right = -25.1
+offset_bottom = -1.0
+grow_horizontal = 2
+grow_vertical = 2
 scale = Vector2(2.5, 2.5)
 texture = ExtResource("6_v4r4p")
+expand_mode = 1
 
-[node name="Label" type="Label" parent="creditsTexts"]
+[node name="Label" type="Label" parent="CanvasLayer/bg_panel/creditsTexts"]
 layout_mode = 1
-anchors_preset = -1
-anchor_left = 8.85
-anchor_top = 11.775
-anchor_right = 8.85
-anchor_bottom = 11.775
-offset_left = -232.0
-offset_top = -49.0
-offset_right = 231.0
-offset_bottom = 51.0
+anchors_preset = 14
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = 0.7
+offset_top = -3.9
+offset_right = 329.7
+offset_bottom = 71.1
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.105, 0.105)
 text = "Stickman: sifrani (https://sketchfab.com/sifrani)
 UI Assets: Kenney
 Music: Dan Knoflicek, yd(OpenGameArt)"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[connection signal="pressed" from="close/close_button" to="." method="_on_close_button_pressed"]
-[connection signal="pressed" from="muteUnmuteButton/unmuteButton" to="." method="_on_unmute_button_pressed"]
-[connection signal="pressed" from="muteUnmuteButton/muteButton" to="." method="_on_mute_button_pressed"]
-[connection signal="pressed" from="credits/creditsButton" to="." method="_on_credits_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/bg_panel/close/close_button" to="." method="_on_close_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/bg_panel/muteUnmuteButton/unmuteButton" to="." method="_on_unmute_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/bg_panel/muteUnmuteButton/muteButton" to="." method="_on_mute_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/bg_panel/credits/creditsButton" to="." method="_on_credits_button_pressed"]

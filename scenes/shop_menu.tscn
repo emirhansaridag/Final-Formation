@@ -23,8 +23,16 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_8n4xd")
 
-[node name="background" type="TextureRect" parent="."]
-layout_mode = 1
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="HBoxContainer" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="background" type="TextureRect" parent="CanvasLayer"]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -33,8 +41,7 @@ grow_vertical = 2
 texture = ExtResource("1_uj65v")
 expand_mode = 1
 
-[node name="backButton" type="Button" parent="."]
-layout_mode = 1
+[node name="backButton" type="Button" parent="CanvasLayer"]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
@@ -45,8 +52,8 @@ offset_bottom = -20.0
 grow_vertical = 0
 text = "Back"
 
-[node name="currencyDisplay" type="Control" parent="."]
-layout_mode = 1
+[node name="currencyDisplay" type="Control" parent="CanvasLayer"]
+layout_mode = 3
 anchors_preset = 1
 anchor_left = 1.0
 anchor_right = 1.0
@@ -56,7 +63,7 @@ offset_right = -20.0
 offset_bottom = 80.0
 grow_horizontal = 0
 
-[node name="coinIcon" type="TextureRect" parent="currencyDisplay"]
+[node name="coinIcon" type="TextureRect" parent="CanvasLayer/currencyDisplay"]
 layout_mode = 1
 anchors_preset = 4
 anchor_top = 0.5
@@ -69,7 +76,7 @@ grow_vertical = 2
 texture = ExtResource("6_amlfo")
 expand_mode = 1
 
-[node name="currencyLabel" type="Label" parent="currencyDisplay"]
+[node name="currencyLabel" type="Label" parent="CanvasLayer/currencyDisplay"]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -86,8 +93,8 @@ text = "100"
 horizontal_alignment = 2
 vertical_alignment = 1
 
-[node name="upgrades" type="Control" parent="."]
-layout_mode = 1
+[node name="upgrades" type="Control" parent="CanvasLayer"]
+layout_mode = 3
 anchor_left = 0.5
 anchor_top = 0.382
 anchor_right = 0.5
@@ -97,7 +104,7 @@ offset_top = -166.72
 offset_right = 238.0
 offset_bottom = 262.28
 
-[node name="damage" type="Control" parent="upgrades"]
+[node name="damage" type="Control" parent="CanvasLayer/upgrades"]
 layout_mode = 1
 anchor_left = 0.51
 anchor_top = 0.195
@@ -108,7 +115,7 @@ offset_top = -81.655
 offset_right = 212.62
 offset_bottom = 0.344994
 
-[node name="panel1" type="TextureRect" parent="upgrades/damage"]
+[node name="panel1" type="TextureRect" parent="CanvasLayer/upgrades/damage"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -122,7 +129,7 @@ offset_bottom = 68.846
 grow_horizontal = 2
 texture = ExtResource("2_5pe57")
 
-[node name="dmgIcon" type="TextureRect" parent="upgrades/damage"]
+[node name="dmgIcon" type="TextureRect" parent="CanvasLayer/upgrades/damage"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.304
@@ -136,7 +143,7 @@ offset_bottom = 46.6
 texture = ExtResource("3_5gjx7")
 expand_mode = 1
 
-[node name="dmgUpgradeBar" type="TextureProgressBar" parent="upgrades/damage"]
+[node name="dmgUpgradeBar" type="TextureProgressBar" parent="CanvasLayer/upgrades/damage"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -150,7 +157,7 @@ offset_bottom = 47.682
 max_value = 12.0
 texture_progress = ExtResource("4_bq4yc")
 
-[node name="dmgUpButton" type="Button" parent="upgrades/damage"]
+[node name="dmgUpButton" type="Button" parent="CanvasLayer/upgrades/damage"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.917
@@ -165,7 +172,7 @@ icon = ExtResource("5_hgolc")
 flat = true
 icon_alignment = 1
 
-[node name="coinSymbol" type="TextureRect" parent="upgrades/damage"]
+[node name="coinSymbol" type="TextureRect" parent="CanvasLayer/upgrades/damage"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.82
@@ -179,7 +186,7 @@ offset_bottom = 20.0
 texture = ExtResource("6_amlfo")
 expand_mode = 1
 
-[node name="dmgCost" type="Label" parent="upgrades/damage"]
+[node name="dmgCost" type="Label" parent="CanvasLayer/upgrades/damage"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.706
@@ -194,7 +201,7 @@ text = "[coin amount]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="attackSpeed" type="Control" parent="upgrades"]
+[node name="attackSpeed" type="Control" parent="CanvasLayer/upgrades"]
 layout_mode = 1
 anchor_left = 0.5
 anchor_top = 0.378
@@ -205,7 +212,7 @@ offset_top = 8.838
 offset_right = 218.0
 offset_bottom = 95.838
 
-[node name="panel2" type="TextureRect" parent="upgrades/attackSpeed"]
+[node name="panel2" type="TextureRect" parent="CanvasLayer/upgrades/attackSpeed"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.525
@@ -219,7 +226,7 @@ offset_bottom = 55.288
 grow_horizontal = 2
 texture = ExtResource("2_5pe57")
 
-[node name="attackSpeedIcon" type="TextureRect" parent="upgrades/attackSpeed"]
+[node name="attackSpeedIcon" type="TextureRect" parent="CanvasLayer/upgrades/attackSpeed"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.298
@@ -234,7 +241,7 @@ scale = Vector2(0.8, 0.8)
 texture = ExtResource("5_lngpu")
 expand_mode = 1
 
-[node name="attackSpeedUpgradeBar" type="TextureProgressBar" parent="upgrades/attackSpeed"]
+[node name="attackSpeedUpgradeBar" type="TextureProgressBar" parent="CanvasLayer/upgrades/attackSpeed"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.5
@@ -248,7 +255,7 @@ offset_bottom = 35.288
 max_value = 12.0
 texture_progress = ExtResource("3_1ltno")
 
-[node name="attackSpeedUpButton" type="Button" parent="upgrades/attackSpeed"]
+[node name="attackSpeedUpButton" type="Button" parent="CanvasLayer/upgrades/attackSpeed"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.917
@@ -263,7 +270,7 @@ icon = ExtResource("5_hgolc")
 flat = true
 icon_alignment = 1
 
-[node name="coinSymbol" type="TextureRect" parent="upgrades/attackSpeed"]
+[node name="coinSymbol" type="TextureRect" parent="CanvasLayer/upgrades/attackSpeed"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.82
@@ -277,7 +284,7 @@ offset_bottom = 20.0
 texture = ExtResource("6_amlfo")
 expand_mode = 1
 
-[node name="attackSpeedCost" type="Label" parent="upgrades/attackSpeed"]
+[node name="attackSpeedCost" type="Label" parent="CanvasLayer/upgrades/attackSpeed"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.706
@@ -292,7 +299,7 @@ text = "[coin amount]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="level" type="Control" parent="upgrades"]
+[node name="level" type="Control" parent="CanvasLayer/upgrades"]
 layout_mode = 1
 anchor_left = 0.5
 anchor_top = 0.555
@@ -303,7 +310,7 @@ offset_top = 105.905
 offset_right = 218.0
 offset_bottom = 191.905
 
-[node name="panel3" type="TextureRect" parent="upgrades/level"]
+[node name="panel3" type="TextureRect" parent="CanvasLayer/upgrades/level"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.525
@@ -317,7 +324,7 @@ offset_bottom = 39.27
 grow_horizontal = 2
 texture = ExtResource("2_5pe57")
 
-[node name="levelIcon" type="TextureRect" parent="upgrades/level"]
+[node name="levelIcon" type="TextureRect" parent="CanvasLayer/upgrades/level"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.296
@@ -332,7 +339,7 @@ scale = Vector2(0.8, 0.8)
 texture = ExtResource("7_lngpu")
 expand_mode = 1
 
-[node name="levelUpgradeBar" type="TextureProgressBar" parent="upgrades/level"]
+[node name="levelUpgradeBar" type="TextureProgressBar" parent="CanvasLayer/upgrades/level"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.494
@@ -346,7 +353,7 @@ offset_bottom = 20.356
 max_value = 12.0
 texture_progress = ExtResource("7_bq4yc")
 
-[node name="levelUpButton" type="Button" parent="upgrades/level"]
+[node name="levelUpButton" type="Button" parent="CanvasLayer/upgrades/level"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.917
@@ -361,7 +368,7 @@ icon = ExtResource("5_hgolc")
 flat = true
 icon_alignment = 1
 
-[node name="coinSymbol" type="TextureRect" parent="upgrades/level"]
+[node name="coinSymbol" type="TextureRect" parent="CanvasLayer/upgrades/level"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.82
@@ -375,7 +382,7 @@ offset_bottom = 20.0
 texture = ExtResource("6_amlfo")
 expand_mode = 1
 
-[node name="levelCost" type="Label" parent="upgrades/level"]
+[node name="levelCost" type="Label" parent="CanvasLayer/upgrades/level"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.706
@@ -390,7 +397,7 @@ text = "[coin amount]"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="maxShooter" type="Control" parent="upgrades"]
+[node name="maxShooter" type="Control" parent="CanvasLayer/upgrades"]
 layout_mode = 1
 anchor_left = 0.5
 anchor_top = 0.555
@@ -401,7 +408,7 @@ offset_top = 259.54
 offset_right = 217.0
 offset_bottom = 345.54
 
-[node name="panel4" type="TextureRect" parent="upgrades/maxShooter"]
+[node name="panel4" type="TextureRect" parent="CanvasLayer/upgrades/maxShooter"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.525
@@ -415,7 +422,7 @@ offset_bottom = 39.27
 grow_horizontal = 2
 texture = ExtResource("2_5pe57")
 
-[node name="maxShooterIcon" type="TextureRect" parent="upgrades/maxShooter"]
+[node name="maxShooterIcon" type="TextureRect" parent="CanvasLayer/upgrades/maxShooter"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.296
@@ -430,7 +437,7 @@ scale = Vector2(0.8, 0.8)
 texture = ExtResource("11_rg5ak")
 expand_mode = 1
 
-[node name="maxShooterUpgradeBar" type="TextureProgressBar" parent="upgrades/maxShooter"]
+[node name="maxShooterUpgradeBar" type="TextureProgressBar" parent="CanvasLayer/upgrades/maxShooter"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.494
@@ -444,7 +451,7 @@ offset_bottom = 20.356
 max_value = 10.0
 texture_progress = ExtResource("11_tnh3q")
 
-[node name="maxShooterUpgradeButton" type="Button" parent="upgrades/maxShooter"]
+[node name="maxShooterUpgradeButton" type="Button" parent="CanvasLayer/upgrades/maxShooter"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.917
@@ -459,7 +466,7 @@ icon = ExtResource("5_hgolc")
 flat = true
 icon_alignment = 1
 
-[node name="coinSymbol" type="TextureRect" parent="upgrades/maxShooter"]
+[node name="coinSymbol" type="TextureRect" parent="CanvasLayer/upgrades/maxShooter"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.82
@@ -473,7 +480,7 @@ offset_bottom = 20.0
 texture = ExtResource("6_amlfo")
 expand_mode = 1
 
-[node name="maxShooterUpgradeCost" type="Label" parent="upgrades/maxShooter"]
+[node name="maxShooterUpgradeCost" type="Label" parent="CanvasLayer/upgrades/maxShooter"]
 layout_mode = 1
 anchors_preset = -1
 anchor_left = 0.706
