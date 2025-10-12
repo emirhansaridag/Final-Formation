@@ -37,9 +37,9 @@ class_name GameConfig
 # Spawn Area Configuration
 @export_group("Spawn Area Settings")
 @export var area_bounds: Vector2 = Vector2(2.5, 2.5)
-@export var ground_min_x: float = -11.0
-@export var ground_max_x: float = 11.0
-@export var min_distance_between_shooters: float = 1.0
+@export var ground_min_x: float = -10.0
+@export var ground_max_x: float = 10.0
+@export var min_distance_between_shooters: float = 0.6
 
 # Camera Configuration
 @export_group("Camera Settings")

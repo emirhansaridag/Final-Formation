@@ -16,7 +16,7 @@ var level_start_time: float = 0.0
 # Time-based currency system
 var currency_timer: float = 0.0
 var currency_per_second: int = 2  # 2 coins per second for level 1
-var level_completion_bonus: int = 400  # Bonus when level completes
+var level_completion_bonus: int = 200  # Bonus when level completes
 var currency_awarded: bool = false  # Track if completion bonus was awarded
 var starting_currency: int = 0  # Track starting coins to calculate earned coins
 

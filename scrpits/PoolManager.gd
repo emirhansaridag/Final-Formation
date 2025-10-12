@@ -37,17 +37,19 @@ func _setup_pools():
 		add_child(projectile_pool)
 		print("  ✅ Created projectile pool")
 	
+	# Enemy pool disabled - enemies are now spawned directly by EnemyWaveManager
+	# which allows for different enemy types per level
 	# If pools already exist, update their parent nodes instead of creating new pools
-	if enemy_pool:
-		enemy_pool.update_parent_node(current_scene)
-		print("  ↻ Updated enemy pool parent node")
-	else:
-		# Create enemy pool
-		var enemy_scene = preload("res://scenes/enemy.tscn")
-		enemy_pool = ObjectPool.new(enemy_scene, 3, config.max_enemies)  # Start with just 3
-		enemy_pool.initialize(current_scene)
-		add_child(enemy_pool)
-		print("  ✅ Created enemy pool")
+	#if enemy_pool:
+	#	enemy_pool.update_parent_node(current_scene)
+	#	print("  ↻ Updated enemy pool parent node")
+	#else:
+	#	# Create enemy pool
+	#	var enemy_scene = preload("res://scenes/stickman.tscn")  # Would need to be configurable per level
+	#	enemy_pool = ObjectPool.new(enemy_scene, 3, config.max_enemies)  # Start with just 3
+	#	enemy_pool.initialize(current_scene)
+	#	add_child(enemy_pool)
+	#	print("  ✅ Created enemy pool")
 	
 	# If pools already exist, update their parent nodes instead of creating new pools
 	if gun_box_pool:
@@ -88,24 +90,32 @@ func spawn_projectile(position: Vector3, rotation: Vector3, direction: float) ->
 func return_projectile(projectile: Node):
 	projectile_pool.return_object(projectile)
 
-# Enemy pool methods
+# Enemy pool methods - DISABLED (enemies now spawned by EnemyWaveManager)
 func spawn_enemy(position: Vector3) -> Node:
-	if not pools_ready or not enemy_pool:
-		print("⚠️ Enemy pool not ready yet")
-		return null
-		
-	var enemy = enemy_pool.get_object()
-	if enemy:
-		enemy.global_position = position
-		# Reset enemy health and stats
-		if enemy.has_method("reset_stats"):
-			enemy.reset_stats()
-		# Don't use tree_exited signals - they can cause issues with pooling
+	print("⚠️ Enemy pool is disabled. Enemies are now spawned by EnemyWaveManager.")
+	return null
 	
-	return enemy
+	# Original code kept for reference:
+	#if not pools_ready or not enemy_pool:
+	#	print("⚠️ Enemy pool not ready yet")
+	#	return null
+	#	
+	#var enemy = enemy_pool.get_object()
+	#if enemy:
+	#	enemy.global_position = position
+	#	# Reset enemy health and stats
+	#	if enemy.has_method("reset_stats"):
+	#		enemy.reset_stats()
+	#	# Don't use tree_exited signals - they can cause issues with pooling
+	#
+	#return enemy
 
 func return_enemy(enemy: Node):
-	enemy_pool.return_object(enemy)
+	if enemy_pool:
+		enemy_pool.return_object(enemy)
+	else:
+		# If no pool, just free the enemy
+		enemy.queue_free()
 
 # Gun box pool methods  
 func spawn_gun_box(position: Vector3) -> Node:
@@ -130,16 +140,11 @@ func return_gun_box(gun_box: Node):
 
 # Utility methods
 func get_pool_stats() -> Dictionary:
-	return {
+	var stats = {
 		"projectiles": {
 			"active": projectile_pool.get_active_count(),
 			"available": projectile_pool.get_available_count(),
 			"total": projectile_pool.get_total_count()
-		},
-		"enemies": {
-			"active": enemy_pool.get_active_count(),
-			"available": enemy_pool.get_available_count(), 
-			"total": enemy_pool.get_total_count()
 		},
 		"gun_boxes": {
 			"active": gun_box_pool.get_active_count(),
@@ -147,10 +152,21 @@ func get_pool_stats() -> Dictionary:
 			"total": gun_box_pool.get_total_count()
 		}
 	}
+	
+	# Add enemy stats only if enemy pool exists
+	if enemy_pool:
+		stats["enemies"] = {
+			"active": enemy_pool.get_active_count(),
+			"available": enemy_pool.get_available_count(), 
+			"total": enemy_pool.get_total_count()
+		}
+	
+	return stats
 
 func cleanup_all():
 	projectile_pool.return_all_objects()
-	enemy_pool.return_all_objects()
+	if enemy_pool:
+		enemy_pool.return_all_objects()
 	gun_box_pool.return_all_objects()
 
 # Clean up invalid objects and prepare for scene transition

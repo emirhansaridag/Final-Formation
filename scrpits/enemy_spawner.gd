@@ -1,6 +1,13 @@
 extends Area3D
 
-@export var enemy_scene: PackedScene = preload("res://scenes/enemy.tscn")
+# Enemy spawning is now handled by EnemyWaveManager which allows different enemies per level
+# Configure these enemy scenes per level in the Inspector
+@export_group("Enemy Scenes")
+@export var regular_enemy_scene: PackedScene
+@export var boss1_scene: PackedScene
+@export var boss2_scene: PackedScene
+@export var boss3_scene: PackedScene
+
 var spawn_interval: float
 var spawn_area_size: Vector3 = Vector3(6, 0, 9)
 var spawn_offset: Vector3
@@ -19,6 +26,13 @@ func _ready():
 	if EnemyWaveManagerScript:
 		wave_manager = EnemyWaveManagerScript.new()
 		add_child(wave_manager)
+		
+		# Pass enemy scene configuration to wave manager
+		wave_manager.regular_enemy_scene = regular_enemy_scene
+		wave_manager.boss1_scene = boss1_scene
+		wave_manager.boss2_scene = boss2_scene
+		wave_manager.boss3_scene = boss3_scene
+		
 		wave_manager.initialize(spawn_offset, get_parent())
 		
 		# Connect wave manager signals

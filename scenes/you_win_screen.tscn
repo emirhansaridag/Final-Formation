@@ -31,56 +31,69 @@ scale = Vector2(15, 10)
 texture = ExtResource("1_tyd0g")
 expand_mode = 1
 
-[node name="homeButton" type="Button" parent="CanvasLayer"]
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -44.0
-offset_top = 73.0
-offset_right = 34.0
-offset_bottom = 146.0
-grow_horizontal = 2
-grow_vertical = 2
-flat = true
-
-[node name="Label" type="Label" parent="CanvasLayer"]
-anchors_preset = -1
-anchor_left = 0.66
-anchor_top = 0.574
-anchor_right = 0.66
-anchor_bottom = 0.574
-offset_left = -50.2
-offset_top = -11.04
-offset_right = 50.8
-offset_bottom = 11.96
+[node name="Label" type="Label" parent="CanvasLayer/TextureRect"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -16.4667
+offset_top = -14.0
+offset_right = 84.5333
+offset_bottom = 9.0
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.085, 0.085)
 text = "Coins Earned"
 
-[node name="coins" type="Label" parent="CanvasLayer"]
-anchors_preset = -1
-anchor_left = 0.254
-anchor_top = 2.429
-anchor_right = 0.254
-anchor_bottom = 2.429
-offset_left = 224.12
-offset_top = -1759.84
-offset_right = 334.12
-offset_bottom = -1736.84
+[node name="coins" type="Label" parent="CanvasLayer/TextureRect"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -18.0667
+offset_top = -11.2
+offset_right = 91.9333
+offset_bottom = 11.8
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.085, 0.085)
 text = "[earned coins]"
 
-[node name="coin" type="TextureRect" parent="CanvasLayer"]
-anchors_preset = -1
-anchor_left = 0.737
-anchor_top = 0.608
-anchor_right = 0.737
-anchor_bottom = 0.608
-offset_left = -15.64
-offset_top = -15.68
-offset_right = 1008.36
-offset_bottom = 1008.32
-scale = Vector2(0.03, 0.03)
+[node name="coin" type="TextureRect" parent="CanvasLayer/TextureRect"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -10.0667
+offset_top = -12.2
+offset_right = 925.933
+offset_bottom = 1011.8
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(0.004, 0.004)
 texture = ExtResource("3_4at7n")
 expand_mode = 1
 
-[connection signal="pressed" from="CanvasLayer/homeButton" to="." method="_on_home_button_pressed"]
+[node name="homeButton" type="Button" parent="CanvasLayer/TextureRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -2.46667
+offset_top = -12.3
+offset_right = 5.53333
+offset_bottom = -1.3
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.595, 0.595)
+flat = true
+
+[connection signal="pressed" from="CanvasLayer/TextureRect/homeButton" to="." method="_on_home_button_pressed"]

@@ -18,6 +18,9 @@ var lod_level: int = 0
 var lod_distance_threshold: float
 
 func _ready():
+	# Add to enemy group for collision detection
+	add_to_group("enemy")
+	
 	# Get values from config safely
 	var config = Global.get_config()
 	max_health = config.enemy_base_health * boss_health_multiplier  # 5x health for Burak Boss
@@ -107,6 +110,10 @@ func _apply_visual_lod():
 
 # Reset object state for pooling
 func reset_object():
+	# Ensure enemy is in the group (in case it was removed)
+	if not is_in_group("enemy"):
+		add_to_group("enemy")
+	
 	health = max_health
 	update_timer = 0.0
 	lod_level = 0
@@ -121,6 +128,10 @@ func reset_object():
 	set_process_priority(0)
 
 func reset_stats():
+	# Ensure enemy is in the group (in case it was removed)
+	if not is_in_group("enemy"):
+		add_to_group("enemy")
+	
 	health = max_health
 	update_timer = 0.0
 	lod_level = 0

@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=4 uid="uid://cx20qa4agtbam"]
+[gd_scene load_steps=33 format=4 uid="uid://cx20qa4agtbam"]
 
 [ext_resource type="Script" uid="uid://d060n7s1f65bq" path="res://scrpits/mainScene.gd" id="1_rxlee"]
 [ext_resource type="Texture2D" uid="uid://dy3lttotfq2o1" path="res://models/mainRoadTextured_Toon Road Texture.png" id="2_1jq6i"]
@@ -8,8 +8,12 @@
 [ext_resource type="Script" uid="uid://w7qrripjsqhr" path="res://scrpits/boxesSpawner.gd" id="5_w16ng"]
 [ext_resource type="PackedScene" uid="uid://crr58756vnux6" path="res://scenes/water.tscn" id="7_al2iq"]
 [ext_resource type="PackedScene" uid="uid://cv7w53clpa8r4" path="res://scenes/enemy_hit_spot.tscn" id="8_dmtm4"]
+[ext_resource type="PackedScene" uid="uid://bbinngqb1qw6n" path="res://scenes/stickman.tscn" id="8_ha8th"]
 [ext_resource type="Texture2D" uid="uid://bipwo14af2wey" path="res://textures/pause_6520121.png" id="9_1xypn"]
+[ext_resource type="PackedScene" uid="uid://dq8e4gfqixpg5" path="res://scenes/aras_boss.tscn" id="9_3tio3"]
 [ext_resource type="AudioStream" uid="uid://njh2o7xiowkv" path="res://music/ZombiesAreComing.ogg" id="10_2n1xb"]
+[ext_resource type="PackedScene" uid="uid://bfyheh43itbr4" path="res://scenes/serat_boss.tscn" id="10_jmmcx"]
+[ext_resource type="PackedScene" uid="uid://bn5e8bctjrmhr" path="res://scenes/burak_boss.tscn" id="11_vdgl5"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_e3o0j"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -67,7 +71,7 @@ points = PackedVector3Array(5.07738, 0.079334, 5.07738, -5.07738, -0.079334, -5.
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_afldj"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_d75nd"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_2n1xb"]
 _surfaces = [{
 "aabb": AABB(-0.4, -0.4, -0.4, 0.8, 0.8, 0.80001),
 "format": 34896613377,
@@ -95,14 +99,14 @@ _surfaces = [{
 "vertex_data": PackedByteArray("AAAAAP7/VNUAAAAA/v//vwAAAAD+//+/AAD///7/VNUAAP///v//vwAA///+////AAAAAAAAVNUAAAAAAAD/vwAAAAAAAP//AAD//wAAVNUAAP//AAD//wAA//8AAP////8AAP7//7///wAA/v//v///AAD+/1TV//////7//7///////v/////////+/1TV//8AAAAA/7///wAAAAD/////AAAAAFTV/////wAA////////AAD///////8AAFTVVNVU1QAA/3//////VNVU1f//////f/+/VNVU1QAA/3//v/+/VNVU1f+//7//f/+/AAD/f/////+qKqoq//////9//7+qKqoqAAD/f/+//7+qKqoq/7//v/9//7+qKqoq")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_d75nd")
+shadow_mesh = SubResource("ArrayMesh_2n1xb")
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_yqrsv"]
 points = PackedVector3Array(-0.4, -0.4, -0.4, 0.399981, 0.4, 0.4, 0.399981, 0.4, -0.4, 0.399981, -0.4, 0.4, -0.4, 0.4, 0.4, 0.399981, -0.4, -0.4, -0.4, 0.4, -0.4, -0.4, -0.4, 0.4)
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sa7lb"]
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_la60t"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_fp4eh"]
 _surfaces = [{
 "aabb": AABB(-0.4, -0.4, -0.4, 0.8, 0.8, 0.80001),
 "format": 34896613377,
@@ -130,7 +134,7 @@ _surfaces = [{
 "vertex_data": PackedByteArray("AAAAAP7/VNUAAAAA/v//vwAAAAD+//+/AAD///7/VNUAAP///v//vwAA///+////AAAAAAAAVNUAAAAAAAD/vwAAAAAAAP//AAD//wAAVNUAAP//AAD//wAA//8AAP////8AAP7//7///wAA/v//v///AAD+/1TV//////7//7///////v/////////+/1TV//8AAAAA/7///wAAAAD/////AAAAAFTV/////wAA////////AAD///////8AAFTVVNVU1QAA/3//////VNVU1f//////f/+/VNVU1QAA/3//v/+/VNVU1f+//7//f/+/AAD/f/////+qKqoq//////9//7+qKqoqAAD/f/+//7+qKqoq/7//v/9//7+qKqoq")
 }]
 blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_la60t")
+shadow_mesh = SubResource("ArrayMesh_fp4eh")
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1g0nc"]
 points = PackedVector3Array(-0.4, -0.4, -0.4, 0.399981, 0.4, 0.4, 0.399981, 0.4, -0.4, 0.399981, -0.4, 0.4, -0.4, 0.4, 0.4, 0.399981, -0.4, -0.4, -0.4, 0.4, -0.4, -0.4, -0.4, 0.4)
@@ -302,6 +306,10 @@ script = ExtResource("5_w16ng")
 
 [node name="enemySpawnerArea" parent="." instance=ExtResource("5_1jq6i")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.1722, 0, -0.493382)
+regular_enemy_scene = ExtResource("8_ha8th")
+boss1_scene = ExtResource("9_3tio3")
+boss2_scene = ExtResource("10_jmmcx")
+boss3_scene = ExtResource("11_vdgl5")
 
 [node name="enemy_hit_spot" parent="." instance=ExtResource("8_dmtm4")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.27562, 0, 9.94705e-08)

@@ -1,5 +1,10 @@
 extends Node3D
 
+# Alien configuration - adjust these in the Inspector
+@export var alien_scale: Vector3 = Vector3(0.2, 0.2, 0.2)  # Adjust alien size here
+@export var health_multiplier: float = 2.0  # Multiplier for base enemy health
+@export var speed_multiplier: float = 3.0  # Multiplier for base enemy speed
+
 var max_health: float
 var health: float
 var speed: float
@@ -19,19 +24,19 @@ func _ready():
 	
 	# Get values from config safely and cache for performance
 	cached_config = Global.get_config()
-	max_health = cached_config.enemy_base_health
+	
+	# Apply alien scale from exported variable
+	scale = alien_scale
+	set_meta("original_scale", alien_scale)
+	
+	# Alien-specific stats using exported multipliers
+	max_health = cached_config.enemy_base_health * health_multiplier
 	health = max_health
-	speed = cached_config.enemy_move_speed
+	speed = cached_config.enemy_move_speed * speed_multiplier
 	update_interval = cached_config.update_frequency_reduction
 	lod_distance_threshold = cached_config.lod_distance_threshold
 	
-	# Set enemy scale from config - CHANGE IN GameConfig.gd TO ADJUST SIZE
-	scale = cached_config.enemy_scale
-	
-	# Store this scale as the "original" for pooling
-	set_meta("original_scale", scale)
-	
-	# Start animation for stickman
+	# Start animation for alien if it has one
 	start_animation()
 	
 	# Initial LOD calculation
@@ -158,10 +163,10 @@ func reset_stats():
 	if has_meta("original_scale"):
 		var original_scale = get_meta("original_scale")
 		scale = original_scale
-		print("Enemy reset_stats: Using stored scale: ", original_scale)
+		print("Alien reset_stats: Using stored scale: ", original_scale)
 	else:
 		scale = Vector3.ONE
-		print("Enemy reset_stats: No stored scale, using Vector3.ONE")
+		print("Alien reset_stats: No stored scale, using Vector3.ONE")
 	
 	_update_lod()
 
@@ -177,14 +182,21 @@ func set_pooled(pooled: bool):
 func start_animation():
 	var animation_player = find_animation_player()
 	if animation_player:
-		animation_player.play("ArmatureAction")  # Stickman animation
-		# In Godot 4, we get the animation and set its loop mode
+		# Check what animations are available
 		var animation_library = animation_player.get_animation_library("")
-		if animation_library and animation_library.has_animation("ArmatureAction"):
-			var animation = animation_library.get_animation("ArmatureAction")
-			animation.loop_mode = Animation.LOOP_LINEAR
+		if animation_library:
+			# Try common animation names for aliens
+			var animation_names = ["ArmatureAction", "Idle", "Walk", "Run", "Action"]
+			for anim_name in animation_names:
+				if animation_library.has_animation(anim_name):
+					animation_player.play(anim_name)
+					var animation = animation_library.get_animation(anim_name)
+					animation.loop_mode = Animation.LOOP_LINEAR
+					print("🎬 Playing alien animation: ", anim_name)
+					return
+			print("⚠️ No suitable animation found for alien. Available animations: ", animation_library.get_animation_list())
 	else:
-		print("Warning: No AnimationPlayer found for stickman")
+		print("⚠️ No AnimationPlayer found for alien")
 
 # Helper function to find AnimationPlayer in the scene tree
 func find_animation_player() -> AnimationPlayer:

@@ -1,0 +1,212 @@
+[gd_scene load_steps=27 format=4 uid="uid://dtc2y61dm3orr"]
+
+[ext_resource type="Shader" uid="uid://fd32aekreao7" path="res://shaders/level_2.gdshader" id="1_3bmlt"]
+[ext_resource type="Texture2D" uid="uid://ct52t8sty1o1p" path="res://textures/panorama6.jpg" id="1_jm1iu"]
+[ext_resource type="Script" uid="uid://d060n7s1f65bq" path="res://scrpits/mainScene.gd" id="1_que50"]
+[ext_resource type="PackedScene" uid="uid://ccwgqjxpl52lb" path="res://scenes/shooter_spawn_area.tscn" id="4_eqxsl"]
+[ext_resource type="Script" uid="uid://biuwskvpc8fh2" path="res://scrpits/shooter_spawner.gd" id="5_b4j7a"]
+[ext_resource type="PackedScene" uid="uid://dlppdngce14cv" path="res://scenes/enemy_spawner_area.tscn" id="6_wo48x"]
+[ext_resource type="PackedScene" uid="uid://cv7w53clpa8r4" path="res://scenes/enemy_hit_spot.tscn" id="7_y0kc7"]
+[ext_resource type="PackedScene" uid="uid://cmarljf2pdkiw" path="res://scenes/alien.tscn" id="8_hey2k"]
+[ext_resource type="Script" uid="uid://w7qrripjsqhr" path="res://scrpits/boxesSpawner.gd" id="8_ne2mo"]
+[ext_resource type="Texture2D" uid="uid://bipwo14af2wey" path="res://textures/pause_6520121.png" id="9_que50"]
+[ext_resource type="AudioStream" uid="uid://njh2o7xiowkv" path="res://music/ZombiesAreComing.ogg" id="10_hey2k"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_pbc48"]
+panorama = ExtResource("1_jm1iu")
+
+[sub_resource type="Sky" id="Sky_jm1iu"]
+sky_material = SubResource("PanoramaSkyMaterial_pbc48")
+
+[sub_resource type="Environment" id="Environment_pbc48"]
+background_mode = 2
+sky = SubResource("Sky_jm1iu")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_jm1iu"]
+render_priority = 0
+shader = ExtResource("1_3bmlt")
+shader_parameter/density = 0.15
+shader_parameter/speed = 0.5
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_y4x0y"]
+material = SubResource("ShaderMaterial_jm1iu")
+size = Vector2(20, 100)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_3bmlt"]
+points = PackedVector3Array(-10.3546, 0.354541, -50.3546, 10.2128, 0.354541, 50.3546, 10.2128, 0.354541, -50.3546, -10.3546, 0.354541, 50.3546)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_afldj"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_d75nd"]
+_surfaces = [{
+"aabb": AABB(-0.4, -0.4, -0.4, 0.8, 0.8, 0.80001),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAADAAEAAAACAAMAAgAHAAMAAgAGAAcABgAFAAcABgAEAAUABAABAAUABAAAAAEAAgAEAAYAAgAAAAQABwABAAMABwAFAAEA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP7/AAAAAP///v8AAAAAAAAAAAAAAAD//wAAAAD//wAA/v8AAP/////+/wAA//8AAAAAAAD/////AAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_3bmlt"]
+resource_name = "mainRoad_Cube_002"
+_surfaces = [{
+"aabb": AABB(-0.4, -0.4, -0.4, 0.8, 0.8, 0.80001),
+"attribute_data": PackedByteArray("/1////8f/z//XwAA/5////+fAAD/3/8//1//v/8f/3//X/+//5//v/+f/7//3/9//1//P/9f/z//X/8//5//P/+f/z//n/8//1//f/9f/3//X/9//5//f/+f/3//n/9/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAAJAAMAAAAGAAkACAAVAAoACAATABUAFAARABcAFAAOABEADQAEAA8ADQACAAQABwAMABIABwABAAwAFgAFAAsAFgAQAAUA"),
+"material": SubResource("StandardMaterial3D_afldj"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP7/VNUAAAAA/v//vwAAAAD+//+/AAD///7/VNUAAP///v//vwAA///+////AAAAAAAAVNUAAAAAAAD/vwAAAAAAAP//AAD//wAAVNUAAP//AAD//wAA//8AAP////8AAP7//7///wAA/v//v///AAD+/1TV//////7//7///////v/////////+/1TV//8AAAAA/7///wAAAAD/////AAAAAFTV/////wAA////////AAD///////8AAFTVVNVU1QAA/3//////VNVU1f//////f/+/VNVU1QAA/3//v/+/VNVU1f+//7//f/+/AAD/f/////+qKqoq//////9//7+qKqoqAAD/f/+//7+qKqoq/7//v/9//7+qKqoq")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_d75nd")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jm1iu"]
+points = PackedVector3Array(-0.4, -0.4, -0.4, 0.399981, 0.4, 0.4, 0.399981, 0.4, -0.4, 0.399981, -0.4, 0.4, -0.4, 0.4, 0.4, 0.399981, -0.4, -0.4, -0.4, 0.4, -0.4, -0.4, -0.4, 0.4)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_sa7lb"]
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_la60t"]
+_surfaces = [{
+"aabb": AABB(-0.4, -0.4, -0.4, 0.8, 0.8, 0.80001),
+"format": 34896613377,
+"index_count": 36,
+"index_data": PackedByteArray("AAADAAEAAAACAAMAAgAHAAMAAgAGAAcABgAFAAcABgAEAAUABAABAAUABAAAAAEAAgAEAAYAAgAAAAQABwABAAMABwAFAAEA"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 8,
+"vertex_data": PackedByteArray("AAAAAP7/AAAAAP///v8AAAAAAAAAAAAAAAD//wAAAAD//wAA/v8AAP/////+/wAA//8AAAAAAAD/////AAAAAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_pbc48"]
+resource_name = "mainRoad_Cube_003"
+_surfaces = [{
+"aabb": AABB(-0.4, -0.4, -0.4, 0.8, 0.8, 0.80001),
+"attribute_data": PackedByteArray("/1////8f/z//XwAA/5////+fAAD/3/8//1//v/8f/3//X/+//5//v/+f/7//3/9//1//P/9f/z//X/8//5//P/+f/z//n/8//1//f/9f/3//X/9//5//f/+f/3//n/9/"),
+"format": 34896613399,
+"index_count": 36,
+"index_data": PackedByteArray("AAAJAAMAAAAGAAkACAAVAAoACAATABUAFAARABcAFAAOABEADQAEAA8ADQACAAQABwAMABIABwABAAwAFgAFAAsAFgAQAAUA"),
+"material": SubResource("StandardMaterial3D_sa7lb"),
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 24,
+"vertex_data": PackedByteArray("AAAAAP7/VNUAAAAA/v//vwAAAAD+//+/AAD///7/VNUAAP///v//vwAA///+////AAAAAAAAVNUAAAAAAAD/vwAAAAAAAP//AAD//wAAVNUAAP//AAD//wAA//8AAP////8AAP7//7///wAA/v//v///AAD+/1TV//////7//7///////v/////////+/1TV//8AAAAA/7///wAAAAD/////AAAAAFTV/////wAA////////AAD///////8AAFTVVNVU1QAA/3//////VNVU1f//////f/+/VNVU1QAA/3//v/+/VNVU1f+//7//f/+/AAD/f/////+qKqoq//////9//7+qKqoqAAD/f/+//7+qKqoq/7//v/9//7+qKqoq")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_la60t")
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_eqxsl"]
+points = PackedVector3Array(-0.4, -0.4, -0.4, 0.399981, 0.4, 0.4, 0.399981, 0.4, -0.4, 0.399981, -0.4, 0.4, -0.4, 0.4, 0.4, 0.399981, -0.4, -0.4, -0.4, 0.4, -0.4, -0.4, -0.4, 0.4)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_que50"]
+points = PackedVector3Array(5.07738, 0.079334, 5.07738, -5.07738, -0.079334, -5.07738, -5.07738, 0.079334, -5.07738, 5.07738, -0.079334, -5.07738, -5.07738, -0.079334, 5.07738, -5.07738, 0.079334, 5.07738, 5.07738, 0.079334, -5.07738, 5.07738, -0.079334, 5.07738)
+
+[node name="level2" type="Node3D"]
+transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
+script = ExtResource("1_que50")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_pbc48")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="CanvasLayer"]
+transform = Transform3D(1, 0, 0, 0, 0.7108, 0.703395, 0, -0.703395, 0.7108, 0, 7.74764, 10.9743)
+current = true
+
+[node name="ground" type="StaticBody3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -40, 0, 0)
+collision_layer = 65
+collision_mask = 65
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="ground"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0, 0)
+mesh = SubResource("PlaneMesh_y4x0y")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="ground"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, -0.354432, 0)
+shape = SubResource("ConvexPolygonShape3D_3bmlt")
+
+[node name="divider" type="MeshInstance3D" parent="ground"]
+transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 0.5, 21.3452, 0.190796, 4.52658)
+mesh = SubResource("ArrayMesh_3bmlt")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="ground"]
+transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 0.5, 21.3452, 0.190796, 4.52658)
+shape = SubResource("ConvexPolygonShape3D_jm1iu")
+
+[node name="divider2" type="MeshInstance3D" parent="ground"]
+transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 0.5, 21.3452, 0.190796, -5.5528)
+mesh = SubResource("ArrayMesh_pbc48")
+skeleton = NodePath("")
+
+[node name="divider3" type="MeshInstance3D" parent="ground"]
+transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 0.5, -18.5793, 0.190796, 4.52658)
+mesh = SubResource("ArrayMesh_3bmlt")
+skeleton = NodePath("")
+
+[node name="divider4" type="MeshInstance3D" parent="ground"]
+transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 0.5, -18.5793, 0.190796, -5.5528)
+mesh = SubResource("ArrayMesh_pbc48")
+skeleton = NodePath("")
+
+[node name="CollisionShape3D5" type="CollisionShape3D" parent="ground"]
+transform = Transform3D(50, 0, 0, 0, 1, 0, 0, 0, 0.5, 21.3452, 0.190796, -5.5528)
+shape = SubResource("ConvexPolygonShape3D_eqxsl")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="ground"]
+transform = Transform3D(5, 0, 0, 0, -4.37114e-08, -2.25, 0, 1, -9.83506e-08, 25.0107, 0, -9.93177)
+shape = SubResource("ConvexPolygonShape3D_que50")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="ground"]
+transform = Transform3D(5, 0, 0, 0, -4.37114e-08, -2.25, 0, 1, -9.83506e-08, 25.0107, 0, 10.116)
+shape = SubResource("ConvexPolygonShape3D_que50")
+
+[node name="adders" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -34, 2.2, 8)
+script = ExtResource("5_b4j7a")
+
+[node name="shooterSpawnArea" parent="." instance=ExtResource("4_eqxsl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.69316, 0.11648, 0)
+
+[node name="boxes" type="Node3D" parent="."]
+script = ExtResource("8_ne2mo")
+
+[node name="enemySpawnerArea" parent="." instance=ExtResource("6_wo48x")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.1722, 0, -0.493382)
+regular_enemy_scene = ExtResource("8_hey2k")
+
+[node name="enemy_hit_spot" parent="." instance=ExtResource("7_y0kc7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.15787, 0, 9.94705e-08)
+
+[node name="TextureRect" type="TextureRect" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+mouse_filter = 2
+texture = ExtResource("9_que50")
+expand_mode = 1
+
+[node name="pause" type="Button" parent="."]
+offset_right = 40.0
+offset_bottom = 40.0
+flat = true
+
+[node name="GameMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("10_hey2k")
+
+[connection signal="pressed" from="pause" to="." method="_on_pause_pressed"]

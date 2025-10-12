@@ -1,11 +1,12 @@
 extends Node
 class_name EnemyWaveManager
 
-# Enemy scenes - using load() instead of preload() to avoid compilation issues
-var stickman_scene: PackedScene
-var serat_boss_scene: PackedScene  
-var aras_boss_scene: PackedScene
-var burak_boss_scene: PackedScene
+# Enemy scenes - configured per level in the scene editor
+@export_group("Enemy Scenes")
+@export var regular_enemy_scene: PackedScene
+@export var boss1_scene: PackedScene
+@export var boss2_scene: PackedScene
+@export var boss3_scene: PackedScene
 
 # Game state
 var game_timer: float = 0.0
@@ -34,27 +35,16 @@ signal enemy_spawned(enemy_type: String)
 func _ready():
 	config = Global.get_config()
 	
-	# Load enemy scenes at runtime
-	stickman_scene = load("res://scenes/stickman.tscn")
-	serat_boss_scene = load("res://scenes/serat_boss.tscn")
-	aras_boss_scene = load("res://scenes/aras_boss.tscn")
-	burak_boss_scene = load("res://scenes/burak_boss.tscn")
+	# Verify enemy scenes are configured
+	print("🔍 Enemy scene configuration:")
+	print("  Regular Enemy: ", regular_enemy_scene)
+	print("  Boss 1: ", boss1_scene)  
+	print("  Boss 2: ", boss2_scene)
+	print("  Boss 3: ", boss3_scene)
 	
-	# Verify scenes loaded correctly with detailed info
-	print("🔍 Scene loading results:")
-	print("  Stickman: ", stickman_scene)
-	print("  Serat Boss: ", serat_boss_scene)  
-	print("  Aras Boss: ", aras_boss_scene)
-	print("  Burak Boss: ", burak_boss_scene)
-	
-	if not stickman_scene:
-		push_error("❌ Failed to load stickman.tscn")
-	if not serat_boss_scene:
-		push_error("❌ Failed to load serat_boss.tscn")
-	if not aras_boss_scene:
-		push_error("❌ Failed to load aras_boss.tscn")
-	if not burak_boss_scene:
-		push_error("❌ Failed to load burak_boss.tscn")
+	if not regular_enemy_scene:
+		push_error("❌ Regular enemy scene not configured!")
+	# Bosses are optional - not all levels need all bosses
 	
 func initialize(spawn_pos: Vector3, parent: Node3D):
 	spawn_position = spawn_pos
@@ -139,19 +129,23 @@ func spawn_enemy(enemy_type: String):
 	var enemy_scene: PackedScene
 	var enemy_instance: Node3D
 	
-	# Select the appropriate enemy scene
+	# Select the appropriate enemy scene from configured scenes
 	match enemy_type:
 		"stickman":
-			enemy_scene = stickman_scene
+			enemy_scene = regular_enemy_scene
 		"serat_boss":
-			enemy_scene = serat_boss_scene
+			enemy_scene = boss1_scene
 		"aras_boss":
-			enemy_scene = aras_boss_scene
+			enemy_scene = boss2_scene
 		"burak_boss":
-			enemy_scene = burak_boss_scene
+			enemy_scene = boss3_scene
 		_:
 			push_error("Unknown enemy type: " + enemy_type)
 			return
+	
+	# Skip spawning if scene is not configured (optional bosses)
+	if not enemy_scene:
+		return
 	
 	# For now, always use normal instantiation since PoolManager doesn't have spawn_enemy_type
 	# TODO: Add boss support to PoolManager later
@@ -163,6 +157,9 @@ func spawn_enemy(enemy_type: String):
 		# Set enemy to PAUSABLE mode so it stops when game is paused
 		enemy_instance.process_mode = Node.PROCESS_MODE_PAUSABLE
 		
+		# Add enemy to "enemy" group for collision detection
+		enemy_instance.add_to_group("enemy")
+		
 		parent_node.add_child(enemy_instance)
 		
 		# Only print for bosses, not regular enemies
@@ -170,7 +167,7 @@ func spawn_enemy(enemy_type: String):
 			print("🚨 BOSS SPAWNED: ", enemy_type, " at position: ", spawn_pos)
 	else:
 		push_error("❌ Enemy scene is null for type: " + enemy_type)
-		print("🔍 Available scenes - Stickman: ", stickman_scene, " | Serat: ", serat_boss_scene, " | Aras: ", aras_boss_scene, " | Burak: ", burak_boss_scene)
+		print("🔍 Configured scenes - Regular: ", regular_enemy_scene, " | Boss1: ", boss1_scene, " | Boss2: ", boss2_scene, " | Boss3: ", boss3_scene)
 		return
 	
 	# Emit signal
