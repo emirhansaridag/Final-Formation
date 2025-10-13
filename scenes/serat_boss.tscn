@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=4 uid="uid://bfyheh43itbr4"]
 
-[ext_resource type="Script" uid="uid://djrecelekrew3" path="res://scrpits/serat_boss.gd" id="1_5ttp6"]
+[ext_resource type="Script" uid="uid://dgluslbdj6s1q" path="res://scrpits/universal_enemy.gd" id="1_5ttp6"]
 [ext_resource type="Texture2D" uid="uid://bq0ypj5arwiga" path="res://models/enemies/seratBoss/seratiş_Image_0.png" id="1_xt5at"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_voq15"]
@@ -147,6 +147,11 @@ size = Vector3(0.538407, 1.27515, 1.1543)
 
 [node name="seratBoss" type="Node3D"]
 script = ExtResource("1_5ttp6")
+health_multiplier = 7.0
+enemy_scale = Vector3(2, 2, 2)
+is_boss = true
+enemy_name = "Serat"
+animation_name = "run"
 
 [node name="Armature" type="Node3D" parent="."]
 transform = Transform3D(-1.34792e-08, 0, 0.308368, 0, 0.308368, 0, -0.308368, 0, -1.34792e-08, 0, 0.505622, 0)

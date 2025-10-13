@@ -1,6 +1,6 @@
 extends Control
 
-@onready var coins_label = $CanvasLayer/TextureRect/coin
+@onready var coins_label = $CanvasLayer/TextureRect/coins
 
 func _ready():
 	# Make sure process mode is set to ALWAYS so it works while paused

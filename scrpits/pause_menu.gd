@@ -60,3 +60,11 @@ func _update_mute_buttons():
 		unmute_btn.visible = is_muted
 	if mute_btn:
 		mute_btn.visible = !is_muted
+
+
+func _on_button_pressed():
+	# Unpause the game first
+	get_tree().paused = false
+	# Then change scene
+	SceneTransition.change_scene_with_fade("res://scenes/main_menu.tscn")
+	print("🏠 Home button pressed - returning to main menu")

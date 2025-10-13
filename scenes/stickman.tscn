@@ -1,6 +1,6 @@
 [gd_scene load_steps=8 format=4 uid="uid://bbinngqb1qw6n"]
 
-[ext_resource type="Script" uid="uid://b42vn4wglhgdo" path="res://scrpits/enemy.gd" id="1_u3e5g"]
+[ext_resource type="Script" uid="uid://dgluslbdj6s1q" path="res://scrpits/universal_enemy.gd" id="1_u3e5g"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_8x0is"]
 resource_name = "red"
@@ -120,6 +120,7 @@ size = Vector3(10.4341, 8.08783, 1)
 [node name="stickman" type="Node3D"]
 transform = Transform3D(0.12, 0, 0, 0, 0.12, 0, 0, 0, 0.12, 0, 0, 0)
 script = ExtResource("1_u3e5g")
+enemy_scale = Vector3(0.16, 0.16, 0.16)
 
 [node name="Sketchfab_model" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, -3.57628e-07, 1, 0, -1, -3.57628e-07, 0, 0, 0)

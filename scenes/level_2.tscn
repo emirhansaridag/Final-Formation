@@ -1,4 +1,4 @@
-[gd_scene load_steps=27 format=4 uid="uid://dtc2y61dm3orr"]
+[gd_scene load_steps=30 format=4 uid="uid://dtc2y61dm3orr"]
 
 [ext_resource type="Shader" uid="uid://fd32aekreao7" path="res://shaders/level_2.gdshader" id="1_3bmlt"]
 [ext_resource type="Texture2D" uid="uid://ct52t8sty1o1p" path="res://textures/panorama6.jpg" id="1_jm1iu"]
@@ -9,8 +9,11 @@
 [ext_resource type="PackedScene" uid="uid://cv7w53clpa8r4" path="res://scenes/enemy_hit_spot.tscn" id="7_y0kc7"]
 [ext_resource type="PackedScene" uid="uid://cmarljf2pdkiw" path="res://scenes/alien.tscn" id="8_hey2k"]
 [ext_resource type="Script" uid="uid://w7qrripjsqhr" path="res://scrpits/boxesSpawner.gd" id="8_ne2mo"]
+[ext_resource type="PackedScene" uid="uid://b4ntmg81c60a0" path="res://scenes/alien_animal.tscn" id="9_172wr"]
 [ext_resource type="Texture2D" uid="uid://bipwo14af2wey" path="res://textures/pause_6520121.png" id="9_que50"]
+[ext_resource type="PackedScene" uid="uid://crq26jbyf3slw" path="res://scenes/alien_boss.tscn" id="10_fldb1"]
 [ext_resource type="AudioStream" uid="uid://njh2o7xiowkv" path="res://music/ZombiesAreComing.ogg" id="10_hey2k"]
+[ext_resource type="PackedScene" uid="uid://cvsg1pmv8wwgw" path="res://scenes/sus_boss.tscn" id="11_guvtl"]
 
 [sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_pbc48"]
 panorama = ExtResource("1_jm1iu")
@@ -113,6 +116,7 @@ points = PackedVector3Array(5.07738, 0.079334, 5.07738, -5.07738, -0.079334, -5.
 [node name="level2" type="Node3D"]
 transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, 0, 0, 0)
 script = ExtResource("1_que50")
+current_level = 1
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
@@ -190,6 +194,10 @@ script = ExtResource("8_ne2mo")
 [node name="enemySpawnerArea" parent="." instance=ExtResource("6_wo48x")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -42.1722, 0, -0.493382)
 regular_enemy_scene = ExtResource("8_hey2k")
+boss1_scene = ExtResource("9_172wr")
+boss2_scene = ExtResource("10_fldb1")
+boss3_scene = ExtResource("11_guvtl")
+current_level = 1
 
 [node name="enemy_hit_spot" parent="." instance=ExtResource("7_y0kc7")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 3.15787, 0, 9.94705e-08)

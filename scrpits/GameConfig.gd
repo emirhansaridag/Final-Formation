@@ -14,13 +14,6 @@ class_name GameConfig
 @export var enemy_base_health: float = 10.0
 @export var enemy_move_speed: float = 2.0
 @export var enemy_spawn_interval: float = 3.0
-@export var enemy_scale: Vector3 = Vector3(0.16, 0.16, 0.16)  # Regular enemy size multiplier
-
-# Boss Configuration
-@export_group("Boss Settings")
-@export var serat_boss_scale: Vector3 = Vector3(2, 2, 2)  # Serat Boss size multiplier
-@export var aras_boss_scale: Vector3 = Vector3(2, 2, 2)  # Aras Boss size multiplier
-@export var burak_boss_scale: Vector3 = Vector3(2, 2, 2)  # Burak Boss size multiplier (larger)
 
 # Gun Box Configuration
 @export_group("Gun Box Settings")
@@ -52,16 +45,30 @@ class_name GameConfig
 @export var shooter_adder_spawn_position: Vector3 = Vector3(-8, 2.2, -50)
 @export var enemy_spawn_offset: Vector3 = Vector3(-45, 0, -0.5)
 
-# Level Progression Settings
-@export_group("Level Progression Settings")
+# Level 1 Progression Settings
+@export_group("Level 1 Progression Settings")
 @export var level_duration: float = 240.0  # 4 minutes (240 seconds)
 @export var serat_boss_start_time: float = 120.0  # 2 minutes (120 seconds)
 @export var aras_boss_start_time: float = 60.0  # 1 minute (60 seconds)
 @export var burak_boss_start_time: float = 180.0  # 3 minutes (180 seconds)
-@export var stickman_spawn_rate: float = 0.2  # Spawn every 4 seconds
-@export var serat_boss_spawn_rate: float = 3.0  # Spawn every 8 seconds
-@export var aras_boss_spawn_rate: float = 4.0  # Spawn every 10 seconds
-@export var burak_boss_spawn_rate: float = 5.0  # Spawn every 12 seconds
+@export var stickman_spawn_rate: float = 0.2  # Spawn every 0.2 seconds
+@export var serat_boss_spawn_rate: float = 3.0  # Spawn every 3 seconds
+@export var aras_boss_spawn_rate: float = 4.0  # Spawn every 4 seconds
+@export var burak_boss_spawn_rate: float = 5.0  # Spawn every 5 seconds
+
+# Level 2 Progression Settings
+@export_group("Level 2 Progression Settings")
+@export var level2_duration: float = 300.0  # 5 minutes (300 seconds)
+@export var alien_spawn_rate: float = 0.25  # Regular alien spawn rate (spawn every 0.25 seconds)
+@export var alien_animal_start_time: float = 60.0  # 1 minute (60 seconds) - when alien_animal boss starts
+@export var alien_animal_spawn_rate: float = 3.5  # Spawn every 3.5 seconds
+@export var alien_boss_start_time: float = 150.0  # 2.5 minutes (150 seconds) - when alien_boss starts
+@export var alien_boss_spawn_rate: float = 5.0  # Spawn every 5 seconds
+@export var sus_boss_start_time: float = 240.0  # 4 minutes (240 seconds) - when sus_boss starts
+@export var sus_boss_spawn_rate: float = 6.0  # Spawn every 6 seconds
+@export var level2_gun_box_spawn_interval: float = 25.0  # Gun boxes spawn every 25 seconds (faster than Level 1)
+@export var level2_shooter_spawner_interval: float = 1  # Shooter adders spawn every 0.8 seconds (faster than Level 1)
+@export var level2_currency_per_second: int = 2  # 3 coins per second for Level 2 (more than Level 1)
 
 # Performance Settings - Optimized for mobile
 @export_group("Performance Settings")

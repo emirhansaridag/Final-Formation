@@ -1,5 +1,8 @@
 extends Node3D
 
+@export_group("Level Configuration")
+@export_enum("Level 1", "Level 2") var current_level: int = 0  # 0 = Level 1, 1 = Level 2
+
 # Camera following variables
 @onready var camera = $CanvasLayer/Camera3D
 @onready var spawn_area = $shooterSpawnArea
@@ -15,7 +18,7 @@ var level_start_time: float = 0.0
 
 # Time-based currency system
 var currency_timer: float = 0.0
-var currency_per_second: int = 2  # 2 coins per second for level 1
+var currency_per_second: int = 2  # Will be set based on level in _ready()
 var level_completion_bonus: int = 200  # Bonus when level completes
 var currency_awarded: bool = false  # Track if completion bonus was awarded
 var starting_currency: int = 0  # Track starting coins to calculate earned coins
@@ -65,6 +68,16 @@ func _ready():
 	camera_follow_speed = config.camera_follow_speed
 	camera_dead_zone = config.camera_dead_zone
 	camera_update_interval = config.update_frequency_reduction
+	
+	# Set level-specific currency per second
+	if current_level == 0:  # Level 1
+		currency_per_second = 2  # Default level 1 value
+	elif current_level == 1:  # Level 2
+		currency_per_second = config.level2_currency_per_second
+	else:
+		currency_per_second = 2  # Default fallback
+	
+	print("💰 Currency system initialized for Level ", current_level + 1, " - ", currency_per_second, " coins/second")
 	
 	# Cache frequently used values for better performance
 	cached_camera_follow_speed = camera_follow_speed

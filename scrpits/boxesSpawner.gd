@@ -1,5 +1,8 @@
 extends Node3D
 
+@export_group("Level Configuration")
+@export_enum("Level 1", "Level 2") var current_level: int = 0  # 0 = Level 1, 1 = Level 2
+
 var gun_box_scene = preload("res://scenes/gun_box.tscn")
 var spawn_interval: float
 var timer = 0.0
@@ -8,8 +11,18 @@ var spawn_position: Vector3
 func _ready():
 	# Get values from config safely
 	var config = Global.get_config()
-	spawn_interval = config.gun_box_spawn_interval
+	
+	# Use level-specific spawn interval
+	if current_level == 0:  # Level 1
+		spawn_interval = config.gun_box_spawn_interval
+	elif current_level == 1:  # Level 2
+		spawn_interval = config.level2_gun_box_spawn_interval
+	else:
+		spawn_interval = config.gun_box_spawn_interval  # Default fallback
+	
 	spawn_position = config.gun_box_spawn_position
+	
+	print("📦 Gun Box Spawner initialized for Level ", current_level + 1, " - Interval: ", spawn_interval, "s")
 	
 	# Start spawning immediately
 	spawn_gun_box()

@@ -1,6 +1,6 @@
 [gd_scene load_steps=12 format=4 uid="uid://bn5e8bctjrmhr"]
 
-[ext_resource type="Script" uid="uid://cndi8avbok2o1" path="res://scrpits/burak_boss.gd" id="1_jxo3o"]
+[ext_resource type="Script" uid="uid://dgluslbdj6s1q" path="res://scrpits/universal_enemy.gd" id="1_jxo3o"]
 [ext_resource type="Texture2D" uid="uid://basp4r5p7lsfa" path="res://models/enemies/burakBoss/burakGilliRigged_Image_0.png" id="1_p2dny"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_o4y86"]
@@ -330,6 +330,12 @@ size = Vector3(0.759049, 1.27515, 1.20844)
 
 [node name="burakBoss" type="Node3D"]
 script = ExtResource("1_jxo3o")
+health_multiplier = 10.0
+speed_multiplier = 1.5
+enemy_scale = Vector3(2, 2, 2)
+is_boss = true
+enemy_name = "Burak"
+animation_name = "run3"
 
 [node name="Armature" type="Node3D" parent="."]
 transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 0, 0.405021, 0)
@@ -392,14 +398,14 @@ bones/7/parent = 6
 bones/7/rest = Transform3D(0.999047, 0.0427815, -0.00869468, -0.0389945, 0.964038, 0.262887, 0.0196287, -0.262297, 0.964787, -5.49335e-10, 0.165632, 5.82077e-10)
 bones/7/enabled = true
 bones/7/position = Vector3(-5.49335e-10, 0.165632, 5.82077e-10)
-bones/7/rotation = Quaternion(-0.0853565, -0.0191667, -0.0167177, 0.996026)
+bones/7/rotation = Quaternion(-0.288001, -0.00405897, -0.0192945, 0.957427)
 bones/7/scale = Vector3(1, 1, 1)
 bones/8/name = "Bone.008"
 bones/8/parent = 7
 bones/8/rest = Transform3D(0.849028, 0.0358292, -0.527132, -0.527108, 0.125771, -0.84044, 0.0361855, 0.991412, 0.125669, 1.07684e-09, 0.184067, 4.65661e-10)
 bones/8/enabled = true
 bones/8/position = Vector3(1.07684e-09, 0.184067, 4.65661e-10)
-bones/8/rotation = Quaternion(0.607892, -0.170199, -0.218789, 0.744064)
+bones/8/rotation = Quaternion(0.597913, -0.202845, -0.184446, 0.753215)
 bones/8/scale = Vector3(1, 1, 1)
 bones/9/name = "Bone.009"
 bones/9/parent = 0
@@ -441,7 +447,7 @@ bones/14/parent = 13
 bones/14/rest = Transform3D(0.939438, -0.0262569, -0.341712, -0.339069, 0.0739348, -0.937852, 0.0498895, 0.996917, 0.0605543, 1.68802e-09, 0.189154, 5.47152e-09)
 bones/14/enabled = true
 bones/14/position = Vector3(1.68802e-09, 0.189154, 5.47152e-09)
-bones/14/rotation = Quaternion(0.619537, -0.090154, -0.15465, 0.764284)
+bones/14/rotation = Quaternion(0.604869, -0.163501, -0.0829518, 0.774932)
 bones/14/scale = Vector3(1, 1, 1)
 
 [node name="geometry_0" type="MeshInstance3D" parent="Armature/Skeleton3D"]

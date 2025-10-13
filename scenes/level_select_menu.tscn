@@ -1,8 +1,9 @@
-[gd_scene load_steps=10 format=3 uid="uid://cgwx45h3aklgk"]
+[gd_scene load_steps=11 format=3 uid="uid://cgwx45h3aklgk"]
 
 [ext_resource type="Script" uid="uid://cif6u3djwhyj0" path="res://level_select_menu.gd" id="1_isecu"]
 [ext_resource type="Texture2D" uid="uid://b5e1yh1nj237q" path="res://textures/levelSelectBackground.png" id="1_m4235"]
 [ext_resource type="Texture2D" uid="uid://brt4v35hw7au3" path="res://textures/level1.png" id="2_wyt36"]
+[ext_resource type="Texture2D" uid="uid://ufriux4bjm00" path="res://textures/level2.png" id="3_5wmf4"]
 [ext_resource type="Texture2D" uid="uid://b8le6yovoxd8d" path="res://textures/arrow.png" id="3_cxc3u"]
 [ext_resource type="Script" uid="uid://onay3yiqlmru" path="res://scrpits/level1_node.gd" id="4_jq82j"]
 
@@ -63,6 +64,7 @@ offset_right = 20.0
 offset_bottom = 20.0
 grow_horizontal = 2
 grow_vertical = 2
+script = ExtResource("4_jq82j")
 
 [node name="level2" type="TextureRect" parent="CanvasLayer/levelNode2"]
 layout_mode = 1
@@ -77,7 +79,7 @@ offset_right = 185.5
 offset_bottom = 388.5
 grow_horizontal = 2
 grow_vertical = 2
-texture = ExtResource("2_wyt36")
+texture = ExtResource("3_5wmf4")
 expand_mode = 1
 flip_h = true
 
@@ -197,6 +199,7 @@ offset_bottom = -20.0
 grow_vertical = 0
 text = "Back"
 
+[connection signal="pressed" from="CanvasLayer/levelNode2/levelButton2" to="CanvasLayer/levelNode2" method="_on_level_button_2_pressed"]
 [connection signal="button_down" from="CanvasLayer/levelNode/levelButton" to="CanvasLayer/levelNode" method="_on_level_button_button_down"]
 [connection signal="button_down" from="CanvasLayer/rightButton" to="." method="_on_right_button_button_down"]
 [connection signal="button_down" from="CanvasLayer/leftButton" to="." method="_on_left_button_button_down"]

@@ -8,6 +8,9 @@ extends Area3D
 @export var boss2_scene: PackedScene
 @export var boss3_scene: PackedScene
 
+@export_group("Level Configuration")
+@export_enum("Level 1", "Level 2") var current_level: int = 0  # 0 = Level 1, 1 = Level 2
+
 var spawn_interval: float
 var spawn_area_size: Vector3 = Vector3(6, 0, 9)
 var spawn_offset: Vector3
@@ -32,6 +35,9 @@ func _ready():
 		wave_manager.boss1_scene = boss1_scene
 		wave_manager.boss2_scene = boss2_scene
 		wave_manager.boss3_scene = boss3_scene
+		
+		# Pass level configuration to wave manager
+		wave_manager.current_level = current_level
 		
 		wave_manager.initialize(spawn_offset, get_parent())
 		

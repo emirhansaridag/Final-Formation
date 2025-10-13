@@ -1,7 +1,7 @@
 [gd_scene load_steps=9 format=4 uid="uid://cmarljf2pdkiw"]
 
 [ext_resource type="Texture2D" uid="uid://bt5mje7ugxhm7" path="res://models/enemies/alien/alien_red Base Color.png" id="1_h100l"]
-[ext_resource type="Script" uid="uid://cppxln3dhecw8" path="res://scrpits/alien.gd" id="1_u8rjw"]
+[ext_resource type="Script" uid="uid://dgluslbdj6s1q" path="res://scrpits/universal_enemy.gd" id="1_u8rjw"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_uc47y"]
 resource_name = "red"
@@ -119,9 +119,13 @@ size = Vector3(13.059, 8.08783, 1)
 
 [node name="alien" type="Node3D"]
 script = ExtResource("1_u8rjw")
+health_multiplier = 2.0
+speed_multiplier = 3.0
+enemy_scale = Vector3(0.2, 0.2, 0.2)
+enemy_name = "alien"
 
 [node name="Sketchfab_model" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -3.57628e-07, 1, 0, -1, -3.57628e-07, 0, 0, 0)
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, 1, 0, -1, -4.37114e-08, 0, 0, 0)
 
 [node name="7750bbe776b343cf89732bee86c422db_fbx" type="Node3D" parent="Sketchfab_model"]
 transform = Transform3D(0.01, 0, 0, 0, -3.57628e-09, -0.01, 0, 0.01, -3.57628e-09, 0, 0, 0)
@@ -182,7 +186,7 @@ bones/6/parent = 0
 bones/6/rest = Transform3D(-0.999872, -0.0160101, 3.22836e-05, 0.0160101, -0.999872, -2.68702e-07, 3.22838e-05, 2.48196e-07, 1, -0.411575, -0.210909, -0.00278136)
 bones/6/enabled = true
 bones/6/position = Vector3(-0.411575, -0.210909, -0.00278136)
-bones/6/rotation = Quaternion(-0.000827425, 0.105362, 0.994402, 0.00796244)
+bones/6/rotation = Quaternion(-0.000827425, 0.105361, 0.994402, 0.00796244)
 bones/6/scale = Vector3(1, 1, 1)
 bones/7/name = "Bone.007"
 bones/7/parent = 6
