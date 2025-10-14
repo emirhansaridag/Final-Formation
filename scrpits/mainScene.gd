@@ -386,7 +386,7 @@ func close_pause_menu():
 
 
 func _on_metro_button_pressed():
-	print("🚇 Metro button pressed - Currency: ", Global.currency, " | Cost: ", Global.METRO_COST)
+	print("🚇 Metro button pressed")
 	
 	# Check if metro is purchased
 	if not Global.metro_purchased:
@@ -398,26 +398,15 @@ func _on_metro_button_pressed():
 		print("⚠️ Metro is on cooldown! Wait ", ceil(metro_cooldown_timer), " seconds")
 		return
 	
-	# Check if player has enough gold (add safety margin)
-	if Global.currency < Global.METRO_COST:
-		print("⚠️ Not enough gold! Have: ", Global.currency, " | Need: ", Global.METRO_COST)
-		return
-	
-	# Deduct cost BEFORE spawning to prevent double-spending
-	var old_currency = Global.currency
-	Global.currency -= Global.METRO_COST
-	Global.currency_changed.emit(Global.currency)
-	print("💰 Gold deducted: ", old_currency, " → ", Global.currency)
-	
 	# Start cooldown IMMEDIATELY to prevent multiple activations
 	is_metro_on_cooldown = true
 	metro_cooldown_timer = metro_cooldown_duration
 	_update_metro_button()
 	
-	# Spawn metro
+	# Spawn metro (FREE - already paid for it in the shop!)
 	spawn_metro()
 	
-	print("🚇 Metro activated! Remaining gold: ", Global.currency)
+	print("🚇 Metro activated! (Free use - already purchased)")
 
 func spawn_metro():
 	"""Spawn a metro that travels from shooters to enemy spawn area"""
@@ -430,14 +419,16 @@ func spawn_metro():
 	add_child(metro)
 	
 	# Get positions
-	var start_pos = spawn_area.global_position
-	start_pos.z -= 5.0  # Spawn behind the shooters
-	start_pos.x += 7.0  
+	#var start_pos = spawn_area.global_position
+	#start_pos.z -= 5.0  # Spawn behind the shooters
+	#start_pos.x += 7.0  
+	var start_pos = Vector3(7, 1, 0)
 
 	
-	var end_pos = enemy_spawner_area.global_position
-	end_pos.z += 8.0  # Go past the enemy spawn area
-	end_pos.x += 7.0  
+	#var end_pos = enemy_spawner_area.global_position
+	#end_pos.z += 8.0  # Go past the enemy spawn area
+	#end_pos.x += 7.0
+	var end_pos = Vector3(7, 1, -50)  
 	
 	# Setup metro with positions
 	if metro.has_method("setup_metro"):
@@ -462,7 +453,7 @@ func _update_metro_cooldown(delta: float):
 		_update_metro_button()
 
 func _update_metro_button():
-	"""Update metro button state based on purchase status, cooldown, and currency"""
+	"""Update metro button state based on purchase status and cooldown"""
 	if not metro_button:
 		return
 	
@@ -480,11 +471,10 @@ func _update_metro_button():
 		metro_button.modulate = Color.ORANGE
 		return
 	
-	# Check if can afford
-	var can_afford = Global.currency >= Global.METRO_COST
-	metro_button.disabled = not can_afford
-	metro_button.text = "METRO: " + str(Global.METRO_COST) + " GOLD"
-	metro_button.modulate = Color.GREEN if can_afford else Color.RED
+	# Ready to use (free!)
+	metro_button.disabled = false
+	metro_button.text = "METRO READY"
+	metro_button.modulate = Color.GREEN
 
 func _on_currency_changed_for_metro(new_amount: int):
 	"""Update metro button when currency changes"""

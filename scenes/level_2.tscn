@@ -233,6 +233,7 @@ text = "Metro"
 
 [node name="GameMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("10_hey2k")
+volume_db = -20.0
 
 [connection signal="pressed" from="pause" to="." method="_on_pause_pressed"]
 [connection signal="pressed" from="metroButton" to="." method="_on_metro_button_pressed"]

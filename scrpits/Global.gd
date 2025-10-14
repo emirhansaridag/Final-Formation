@@ -33,7 +33,7 @@ var enemies_killed: int = 0
 
 # Metro power-up system
 var metro_purchased: bool = false
-const METRO_COST: int = 500  # Cost per use
+const METRO_COST: int = 500  # One-time purchase cost (free to use after purchase)
 
 # Signals for UI updates
 signal currency_changed(new_amount: int)

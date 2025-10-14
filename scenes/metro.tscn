@@ -1,4 +1,4 @@
-[gd_scene load_steps=81 format=4 uid="uid://bdck3qp3erap5"]
+[gd_scene load_steps=80 format=4 uid="uid://bdck3qp3erap5"]
 
 [ext_resource type="Script" uid="uid://j3frg8s0ekk3" path="res://scrpits/metro.gd" id="1_t2d2l"]
 [ext_resource type="Texture2D" uid="uid://c8wdk8kxstom5" path="res://models/metro/metro_metal.jpg" id="1_tvrsl"]
@@ -1924,9 +1924,7 @@ blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_ugr7r")
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_tvrsl"]
-size = Vector3(19.6493, 5.32074, 1.12277)
-
-[sub_resource type="BoxMesh" id="BoxMesh_t2d2l"]
+size = Vector3(10.0648, 5.32074, 1.12277)
 
 [node name="metro" type="Node3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.65332, 0, 0)
@@ -2082,11 +2080,9 @@ skeleton = NodePath("")
 
 [node name="Area3D" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.62343, -2.08671, -10.0263)
+collision_layer = 0
+collision_mask = 16
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0930576, 2.72427, 18.1246)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00646305, 2.72427, 18.1246)
 shape = SubResource("BoxShape3D_tvrsl")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="Area3D"]
-transform = Transform3D(19.385, 0, 0, 0, 5.95, 0, 0, 0, 1, 0, 3.0232, 18.1288)
-mesh = SubResource("BoxMesh_t2d2l")

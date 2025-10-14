@@ -1,11 +1,13 @@
 # Godot 4+ specific ignores
 .godot/
 .import/
+*.import
 
 # Godot-specific
 *.translation
-*.import
 *.log
+*.tmp
+*.tscn[0-9]*  # Godot temp scene files
 
 # Imported translations (automatically generated from CSV files)
 *.translation
