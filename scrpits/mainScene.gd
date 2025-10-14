@@ -35,6 +35,13 @@ var game_over_popup: Control = null
 var you_win_popup: Control = null
 var pause_menu_popup: Control = null
 
+# Metro system
+var metro_scene: PackedScene = preload("res://scenes/metro.tscn")
+var metro_cooldown_timer: float = 0.0
+var metro_cooldown_duration: float = 10.0  # 10 seconds cooldown
+var is_metro_on_cooldown: bool = false
+@onready var metro_button = get_node_or_null("CanvasLayer/metroButton")
+
 # Performance optimization
 var camera_update_timer: float = 0.0
 var camera_update_interval: float
@@ -121,6 +128,16 @@ func _ready():
 	starting_currency = Global.currency
 	
 	level_start_time = Time.get_unix_time_from_system()
+	
+	# Setup metro button
+	if metro_button:
+		metro_button.pressed.connect(_on_metro_button_pressed)
+		_update_metro_button()
+		print("🚇 Metro button connected")
+	
+	# Connect to Global signals for metro
+	Global.currency_changed.connect(_on_currency_changed_for_metro)
+	Global.metro_purchased_signal.connect(_update_metro_button)
 
 func _setup_pause_modes():
 	# Set all game object nodes to PAUSABLE so they stop when the game is paused
@@ -160,6 +177,9 @@ func _process(delta):
 	# Time-based currency system
 	_update_currency_system(delta)
 	
+	# Update metro cooldown
+	_update_metro_cooldown(delta)
+	
 	# Display level progress (simple console output for now) - already optimized with timer
 	if wave_manager:
 		_display_level_progress()
@@ -169,6 +189,11 @@ func _input(event):
 	if event.is_action_pressed("ui_cancel"):  # ESC key
 		toggle_pause_menu()
 		get_viewport().set_input_as_handled()
+	
+	# Debug cheat: Press G to add 1000 gold (for testing)
+	if event is InputEventKey and event.pressed and event.keycode == KEY_G:
+		Global.add_currency(1000)
+		print("💰 DEBUG: Added 1000 gold! Total: ", Global.currency)
 
 func _update_camera(delta: float):
 	# Don't update camera if paused
@@ -358,3 +383,109 @@ func close_pause_menu():
 		pause_menu_popup = null
 		get_tree().paused = false
 		print("▶️ Game resumed")
+
+
+func _on_metro_button_pressed():
+	print("🚇 Metro button pressed - Currency: ", Global.currency, " | Cost: ", Global.METRO_COST)
+	
+	# Check if metro is purchased
+	if not Global.metro_purchased:
+		print("⚠️ Metro power not purchased yet! Buy it in Shop 2")
+		return
+	
+	# Check if on cooldown
+	if is_metro_on_cooldown:
+		print("⚠️ Metro is on cooldown! Wait ", ceil(metro_cooldown_timer), " seconds")
+		return
+	
+	# Check if player has enough gold (add safety margin)
+	if Global.currency < Global.METRO_COST:
+		print("⚠️ Not enough gold! Have: ", Global.currency, " | Need: ", Global.METRO_COST)
+		return
+	
+	# Deduct cost BEFORE spawning to prevent double-spending
+	var old_currency = Global.currency
+	Global.currency -= Global.METRO_COST
+	Global.currency_changed.emit(Global.currency)
+	print("💰 Gold deducted: ", old_currency, " → ", Global.currency)
+	
+	# Start cooldown IMMEDIATELY to prevent multiple activations
+	is_metro_on_cooldown = true
+	metro_cooldown_timer = metro_cooldown_duration
+	_update_metro_button()
+	
+	# Spawn metro
+	spawn_metro()
+	
+	print("🚇 Metro activated! Remaining gold: ", Global.currency)
+
+func spawn_metro():
+	"""Spawn a metro that travels from shooters to enemy spawn area"""
+	if not spawn_area or not enemy_spawner_area:
+		print("⚠️ Cannot spawn metro - missing spawn areas")
+		return
+	
+	# Instantiate metro
+	var metro = metro_scene.instantiate()
+	add_child(metro)
+	
+	# Get positions
+	var start_pos = spawn_area.global_position
+	start_pos.z -= 5.0  # Spawn behind the shooters
+	start_pos.x += 7.0  
+
+	
+	var end_pos = enemy_spawner_area.global_position
+	end_pos.z += 8.0  # Go past the enemy spawn area
+	end_pos.x += 7.0  
+	
+	# Setup metro with positions
+	if metro.has_method("setup_metro"):
+		metro.setup_metro(start_pos, end_pos)
+	
+	print("🚇 Metro spawned from ", start_pos, " to ", end_pos)
+
+func _update_metro_cooldown(delta: float):
+	"""Update metro cooldown timer"""
+	if not is_metro_on_cooldown:
+		return
+	
+	metro_cooldown_timer -= delta
+	
+	if metro_cooldown_timer <= 0.0:
+		is_metro_on_cooldown = false
+		metro_cooldown_timer = 0.0
+		_update_metro_button()
+		print("🚇 Metro ready!")
+	else:
+		# Update button text with remaining cooldown
+		_update_metro_button()
+
+func _update_metro_button():
+	"""Update metro button state based on purchase status, cooldown, and currency"""
+	if not metro_button:
+		return
+	
+	# Check if metro is purchased
+	if not Global.metro_purchased:
+		metro_button.disabled = true
+		metro_button.text = "NOT OWNED"
+		metro_button.modulate = Color.GRAY
+		return
+	
+	# Check if on cooldown
+	if is_metro_on_cooldown:
+		metro_button.disabled = true
+		metro_button.text = "COOLDOWN: " + str(ceil(metro_cooldown_timer)) + "s"
+		metro_button.modulate = Color.ORANGE
+		return
+	
+	# Check if can afford
+	var can_afford = Global.currency >= Global.METRO_COST
+	metro_button.disabled = not can_afford
+	metro_button.text = "METRO: " + str(Global.METRO_COST) + " GOLD"
+	metro_button.modulate = Color.GREEN if can_afford else Color.RED
+
+func _on_currency_changed_for_metro(new_amount: int):
+	"""Update metro button when currency changes"""
+	_update_metro_button()

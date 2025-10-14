@@ -155,3 +155,6 @@ func show_current_stats():
 	print("Max Shooter Level: ", Global.get_current_max_shooter_level(), " (Upgrade Level: ", Global.get_upgrade_level("max_level"), "/", Global.get_max_upgrade_level("max_level"), ")")
 	print("Max Shooters: ", Global.get_current_max_shooters(), " (Level: ", Global.get_upgrade_level("max_shooter"), "/", Global.get_max_upgrade_level("max_shooter"), ")")
 	print("==================")
+
+func _on_shop_2_button_pressed():
+		SceneTransition.change_scene_with_fade("res://scenes/shop_2.tscn")

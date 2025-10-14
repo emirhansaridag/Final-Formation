@@ -28,14 +28,19 @@ var max_level_upgrades: int = 12
 var max_shooter_upgrades: int = 10
 
 # Stats
-var currency: int = 0  # Start with small amount, earn through time
+var currency: int = 10000  # Start with small amount, earn through time
 var enemies_killed: int = 0
+
+# Metro power-up system
+var metro_purchased: bool = false
+const METRO_COST: int = 500  # Cost per use
 
 # Signals for UI updates
 signal currency_changed(new_amount: int)
 signal level_changed(new_level: int)
 signal stats_updated
 signal upgrade_purchased(upgrade_type: String, new_level: int)
+signal metro_purchased_signal  # Signal for when metro is first purchased
 
 func _ready():
 	# Always create fresh config to pick up script changes

@@ -1,0 +1,169 @@
+[gd_scene load_steps=6 format=3 uid="uid://ttcrnts50bh1"]
+
+[ext_resource type="Texture2D" uid="uid://c2kkb2gf6p2sd" path="res://textures/shoppingBackground2.png" id="1_6dog7"]
+[ext_resource type="Script" uid="uid://u6o4n3lstbv" path="res://scrpits/shop_2.gd" id="1_demrs"]
+[ext_resource type="Texture2D" uid="uid://cqqo6d4ktckip" path="res://textures/upgradeMenuTextures/coin.png" id="3_sg0pc"]
+[ext_resource type="Texture2D" uid="uid://bhy1mhuq81hha" path="res://textures/panel_brown.png" id="4_ukuit"]
+[ext_resource type="Texture2D" uid="uid://bk3o3nmwt2drt" path="res://textures/metroIcon.png" id="5_busu4"]
+
+[node name="shop2" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_demrs")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="background" type="TextureRect" parent="CanvasLayer"]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_6dog7")
+expand_mode = 1
+
+[node name="backButton" type="Button" parent="CanvasLayer"]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -80.0
+offset_right = 120.0
+offset_bottom = -20.0
+grow_vertical = 0
+text = "Back"
+
+[node name="shop2Button" type="Button" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -118.0
+offset_top = -80.0
+offset_right = -18.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Shop"
+
+[node name="currencyDisplay" type="Control" parent="CanvasLayer"]
+layout_mode = 3
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -200.0
+offset_top = 20.0
+offset_right = -20.0
+offset_bottom = 80.0
+grow_horizontal = 0
+
+[node name="coinIcon" type="TextureRect" parent="CanvasLayer/currencyDisplay"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_left = 10.0
+offset_top = -20.0
+offset_right = 50.0
+offset_bottom = 20.0
+grow_vertical = 2
+texture = ExtResource("3_sg0pc")
+expand_mode = 1
+
+[node name="currencyLabel" type="Label" parent="CanvasLayer/currencyDisplay"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -120.0
+offset_top = -15.0
+offset_right = -10.0
+offset_bottom = 15.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "100"
+horizontal_alignment = 2
+vertical_alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="CanvasLayer"]
+offset_left = 80.0
+offset_top = 120.0
+offset_right = 180.0
+offset_bottom = 220.0
+scale = Vector2(1.7, 1.7)
+texture = ExtResource("4_ukuit")
+
+[node name="metroIcon" type="TextureRect" parent="CanvasLayer/TextureRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.5882
+offset_top = 8.82353
+offset_right = 179.412
+offset_bottom = 222.824
+grow_horizontal = 2
+scale = Vector2(0.2, 0.2)
+texture = ExtResource("5_busu4")
+
+[node name="Label" type="Label" parent="CanvasLayer/TextureRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -14.0882
+offset_top = 6.73528
+offset_right = 32.9118
+offset_bottom = 29.7353
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+text = "Metro"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="buy" type="Button" parent="CanvasLayer/TextureRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -46.4706
+offset_top = -27.647
+offset_right = 84.5294
+offset_bottom = 3.35295
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.7, 0.7)
+text = "Buy"
+
+[node name="statusLabel" type="Label" parent="CanvasLayer/TextureRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -64.4118
+offset_top = -0.411758
+offset_right = 119.588
+offset_bottom = 22.5882
+grow_horizontal = 2
+grow_vertical = 0
+scale = Vector2(0.7, 0.7)
+text = "[status label]"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[connection signal="pressed" from="CanvasLayer/backButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/shop2Button" to="." method="_on_shop_2_button_pressed"]

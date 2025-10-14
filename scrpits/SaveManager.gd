@@ -32,6 +32,7 @@ func save_game():
 	# shooter_level is not saved - it resets to shooter_starter_level each level
 	save_file.set_value(SECTION_PLAYER, "shooter_starter_level", Global.shooter_starter_level)
 	save_file.set_value(SECTION_PLAYER, "max_shooters", Global.max_shooters)
+	save_file.set_value(SECTION_PLAYER, "metro_purchased", Global.metro_purchased)
 	
 	# Upgrade levels
 	save_file.set_value(SECTION_UPGRADES, "damage_upgrade_level", Global.damage_upgrade_level)
@@ -81,6 +82,7 @@ func load_game():
 	# shooter_level is not loaded - it resets to shooter_starter_level each level
 	Global.shooter_starter_level = save_file.get_value(SECTION_PLAYER, "shooter_starter_level", DEFAULT_SHOOTER_LEVEL)
 	Global.max_shooters = save_file.get_value(SECTION_PLAYER, "max_shooters", 3)
+	Global.metro_purchased = save_file.get_value(SECTION_PLAYER, "metro_purchased", false)
 	
 	# Load upgrade levels
 	Global.damage_upgrade_level = save_file.get_value(SECTION_UPGRADES, "damage_upgrade_level", 0)
@@ -112,6 +114,7 @@ func set_default_values():
 	Global.max_shooter_upgrade_level = 0
 	
 	Global.enemies_killed = 0
+	Global.metro_purchased = false
 	
 	print("🆕 Default values set for new game")
 

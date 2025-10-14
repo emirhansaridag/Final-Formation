@@ -13,7 +13,7 @@ config_version=5
 config/name="Final Formation"
 run/main_scene="uid://be0tbn5dgviiu"
 config/features=PackedStringArray("4.4", "Forward Plus")
-config/icon="res://icon.svg"
+config/icon="uid://y5k8hl0cfah8"
 
 [autoload]
 

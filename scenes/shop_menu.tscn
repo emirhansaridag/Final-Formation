@@ -52,6 +52,20 @@ offset_bottom = -20.0
 grow_vertical = 0
 text = "Back"
 
+[node name="shop2Button" type="Button" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -118.0
+offset_top = -80.0
+offset_right = -18.0
+offset_bottom = -20.0
+grow_horizontal = 0
+grow_vertical = 0
+text = "Shop"
+
 [node name="currencyDisplay" type="Control" parent="CanvasLayer"]
 layout_mode = 3
 anchors_preset = 1
@@ -494,3 +508,6 @@ offset_bottom = 12.0
 text = "[coin amount]"
 horizontal_alignment = 1
 vertical_alignment = 1
+
+[connection signal="pressed" from="CanvasLayer/backButton" to="." method="_on_back_button_pressed"]
+[connection signal="pressed" from="CanvasLayer/shop2Button" to="." method="_on_shop_2_button_pressed"]
