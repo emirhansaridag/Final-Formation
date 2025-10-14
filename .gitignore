@@ -41,11 +41,18 @@ $RECYCLE.BIN/
 x64/
 x86/
 [Aa][Rr][Mm]/
-[Aa][Rr][Mm]64/
+[Aa][Rr][Rm]64/
 bld/
 [Bb]in/
 [Oo]bj/
 [Ll]og/
+
+# Godot exports (APK, EXE, etc - don't commit build files)
+exports/
+*.apk
+*.exe
+*.dmg
+*.app
 
 # Visual Studio Code
 .vscode/
